@@ -22,11 +22,11 @@ public class playerMovement : MonoBehaviour {
             horizontalMove = Input.GetAxisRaw("Horizontal") * walkSpeed;
         }
 
-        if (Input.GetAxisRaw("Vertical") >= 0.5f) {
+        if (Input.GetAxisRaw("Vertical") >= 0.5f || Input.GetAxisRaw("Jump") == 1) {
             
             isJump = true;
         }
-        else if (Input.GetAxisRaw("Vertical") <= -0.5f) {
+        else if (Input.GetAxisRaw("Vertical") <= -0.5f || Input.GetAxisRaw("Crouch") == 1) {
 
             isCrouch = true;
         }
