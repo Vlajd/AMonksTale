@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class playerController : MonoBehaviour
 {
+	public bool isFlipped = false;
+	public int flipCount = 0;
 	[SerializeField] private float m_JumpForce = 400f;
 	[SerializeField] private float m_CrouchSpeed = .36f;
 	[SerializeField] private float m_MovementFading = .05f;
@@ -14,7 +16,7 @@ public class playerController : MonoBehaviour
 	[SerializeField] private Transform m_CeilingCheck;
 	[SerializeField] private Collider2D m_CrouchDisableCollider;
     private bool m_Grounded;
-    private bool m_FacingRight = true;
+    public bool m_FacingRight = true;
     private bool m_wasCrouching = false;
 	const float k_GroundedRadius = .2f;
 	const float k_CeilingRadius = .2f;
@@ -108,11 +110,27 @@ public class playerController : MonoBehaviour
 		}
 	}
 
-	private void Flip() {
+	public void Flip() {
 		m_FacingRight = !m_FacingRight;
 
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+
+		// Debug Wrong Direction Bug
+		if (!isFlipped) {
+			isFlipped = true;
+			Debug.Log("isFlipped (left): " + isFlipped);
+		}
+		else if (isFlipped) {
+			isFlipped = false;
+			Debug.Log("isFlipped (left): " + isFlipped);
+		}
+		if (m_FacingRight)
+			Debug.Log("right " + m_FacingRight);
+		else
+			Debug.Log("left " + !m_FacingRight);
+
+		flipCount ++;
 	}
 }

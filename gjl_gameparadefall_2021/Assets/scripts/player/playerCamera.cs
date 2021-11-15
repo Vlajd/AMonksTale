@@ -8,8 +8,9 @@ public class playerCamera : MonoBehaviour
     public GameObject playerBool;
     public float smoothing;
     private Vector3 offset;
-    [SerializeField] private float lowestY;
+    public float lowestY;
     Vector3 targetCamPos;
+    float i;
 
     void Start () {
 
@@ -34,10 +35,6 @@ public class playerCamera : MonoBehaviour
             transform.position = new Vector3(transform.position.x, lowestY, transform.position.z);
 
             if (playerTarget[0].position.y < lowestY && playerTarget[1].position.y > lowestY) {
-
-                playerBool.GetComponent<playerMovement>().hardToggle();
-            }
-            else if (playerTarget[1].position.y < lowestY && playerTarget[0].position.y > lowestY) {
 
                 playerBool.GetComponent<playerMovement>().hardToggle();
             }

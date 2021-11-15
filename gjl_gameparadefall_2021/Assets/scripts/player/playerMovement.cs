@@ -1,118 +1,176 @@
+// only using the basics, damn...
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour {
-    
+public class playerMovement : MonoBehaviour
+{
+    // Damn, soo many objects...
+    public GameObject playerPos;
+    public GameObject ghostPos;
+    public GameObject cam;
     public playerController controller;
     public float walkSpeed = 40f;
     public float sprintSpeed = 60f;
-    float horizontalMove = 0f;
-    bool isJump = false;
-    bool isCrouch = false;
+    public float characterSmoothing;
+    public float ghostSpeedDivide = 3.0f;
+    private float horizontalMove = 0f;
+    private float verticalMove = 0f;
+    private float dist;
+    private bool isJump = false;
+    private bool isCrouch = false;
     public bool isControlled;
-    bool hasToggled = false;
+    private int checkFlipCount;
     [SerializeField] private bool isGhost;
+    [SerializeField] private bool isNPC;
     [SerializeField] private Collider2D ghostEnableCollider;
     [SerializeField] private Rigidbody2D ghostEnableRigidBody;
-    int i = 0;
+    [SerializeField] private SpriteRenderer ghostRender;
+    int isParented = 0;
 
-    void Start () {
+    void Start() {
 
         if (isGhost == true) {
 
             ghostEnableRigidBody.isKinematic = true;
+            ghostRender.enabled = false;
         }
         else {
             ghostEnableRigidBody.isKinematic = false;
         }
 
+        // Checks every few seconds divided by idk how much for input on E
         InvokeRepeating("toggle", 0.3f, 0.3f);
     }
 
     void Update() {
-
+        
+        // see if mate is controlled before giving him controlls
         if (isControlled == true) {
             checkInputs();
         }
+        // cancel every motion if mate doesn't have controlls
         else {
             horizontalMove = 0;
+            verticalMove = 0;
             isJump = false;
             isCrouch = false;
         }
+
+        // see if ghost is close enough to player to merge
+        dist = Vector3.Distance(playerPos.transform.position, ghostPos.transform.position);
+
+        if (isParented == 0 && isGhost == true) {
+
+            ghostPos.transform.position = playerPos.transform.position;
+        }
     }
 
+    // Most of Inputs are over here
     void checkInputs() {
 
-        if (Input.GetAxisRaw("Sprint") == 1 && Input.GetAxisRaw("Vertical") >= 0) {
+        // sprint   left shift
+        if (Input.GetAxisRaw("Sprint") == 1) {
 
-            horizontalMove = Input.GetAxisRaw("Horizontal") * sprintSpeed;
+            if (isGhost == true) {
+
+                horizontalMove = Input.GetAxisRaw("Horizontal") * sprintSpeed / ghostSpeedDivide;
+                verticalMove = Input.GetAxisRaw("Vertical") * sprintSpeed;
+            }
+            else {
+
+                horizontalMove = Input.GetAxisRaw("Horizontal") * sprintSpeed;
+                verticalMove = Input.GetAxisRaw("Vertical") * sprintSpeed;
+            }
         }
         else {
-            
+
             horizontalMove = Input.GetAxisRaw("Horizontal") * walkSpeed;
         }
 
+        // jump     spacebar or W
         if (Input.GetAxisRaw("Vertical") >= 0.5f || Input.GetAxisRaw("Jump") == 1) {
+
+            if (isGhost == true) {
+                verticalMove = Input.GetAxisRaw("Vertical") * walkSpeed;
+                transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0f, verticalMove * Time.fixedDeltaTime, 0f), characterSmoothing * Time.fixedDeltaTime);
+            }
             
             isJump = true;
         }
+        // crouch   left ctrl or S
         else if (Input.GetAxisRaw("Vertical") <= -0.5f || Input.GetAxisRaw("Crouch") == 1) {
 
-            isCrouch = true;
+            if (isGhost == true) {
+                if (transform.position.y >= cam.GetComponent<playerCamera>().lowestY) {
+                    verticalMove = Input.GetAxisRaw("Vertical") * walkSpeed;
+                    transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0f, verticalMove * Time.fixedDeltaTime, 0f), characterSmoothing * Time.fixedDeltaTime);
+                }
+            }
+            else {
+                isCrouch = true;
+            }
         }
+        // resets Vertical Input
         else if (Input.GetAxisRaw("Vertical") == 0) {
 
             isCrouch = false;
         }
     }
 
-    void toggle () {
-        if (Input.GetAxisRaw("Toggle") * Time.fixedDeltaTime > 0.0f && Input.GetAxisRaw("Toggle") * Time.fixedDeltaTime <= 3.0f && hasToggled == false) {
-            hasToggled = true;
+    // toggles the states of the character, ghost and npc
+    void toggle() {
 
-            if (i < 1) {
-            
-                if (isGhost == true) {
-                
+        // Input is E
+        if (Input.GetAxisRaw("Toggle") * Time.fixedDeltaTime > 0.0f && Input.GetAxisRaw("Toggle") * Time.fixedDeltaTime <= 3.0f) {
+
+            // Parent Ghost
+            if (dist < 1.0f) {
+                if (isParented < 1 && isGhost == true) {
+
                     ghostEnableCollider.enabled = true;
                     ghostEnableRigidBody.isKinematic = false;
                     transform.parent = null;
 
-                    isGhost = false;
+                    ghostRender.enabled = true;
+
+                    isParented++;
+
+                    // Debug Flip Behavoiur
+                    checkFlipCount = controller.flipCount;
+                }
+                else if (isParented > 0 && isGhost == true) {
+
+                    ghostPos.transform.SetParent(playerPos.transform);
+                    ghostRender.enabled = false;
+
+                    isControlled = false;
+                    
+                    isParented = 0;
+
+                    ghostPos.transform.position = playerPos.transform.position;
                 }
 
-                i++;
-            }
+                if (isGhost == false) {
 
-            if (isControlled == true) {
-                isControlled = false;
+                    isControlled = true;
+                }
             }
-            else if (isControlled == false) {
-                isControlled = true;
+            // switch users
+            else if (dist > 1.0f) {
+                
+                if (isControlled == true) {
+                    isControlled = false;
+                }
+                else if (isControlled == false) {
+                    isControlled = true;
+                }
             }
-
-            hasToggled = false;
         }
     }
 
-    public void hardToggle () {
-
-        hasToggled = true;
-
-        if (i < 1) {
-            
-            if (isGhost == true) {
-                
-                ghostEnableCollider.enabled = true;
-                ghostEnableRigidBody.isKinematic = false;
-                transform.parent = null;
-
-                isGhost = false;
-            }
-
-            i++;
-        }
+    // just inverts the states
+    public void hardToggle() {
 
         if (isControlled == true) {
             isControlled = false;
@@ -120,12 +178,10 @@ public class playerMovement : MonoBehaviour {
         else if (isControlled == false) {
             isControlled = true;
         }
-
-        hasToggled = false;
     }
 
-
-    void FixedUpdate () {
+    // applies the data
+    void FixedUpdate() {
 
         controller.Move(horizontalMove * Time.fixedDeltaTime, isCrouch, isJump);
         isJump = false;
