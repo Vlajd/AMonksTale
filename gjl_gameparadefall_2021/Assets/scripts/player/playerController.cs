@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class playerController : MonoBehaviour
 {
-	public bool isFlipped = false;
-	public int flipCount = 0;
 	[SerializeField] private float m_JumpForce = 400f;
 	[SerializeField] private float m_CrouchSpeed = .36f;
 	[SerializeField] private float m_MovementFading = .05f;
@@ -118,19 +116,10 @@ public class playerController : MonoBehaviour
 		transform.localScale = theScale;
 
 		// Debug Wrong Direction Bug
-		if (!isFlipped) {
-			isFlipped = true;
-			Debug.Log("isFlipped (left): " + isFlipped);
-		}
-		else if (isFlipped) {
-			isFlipped = false;
-			Debug.Log("isFlipped (left): " + isFlipped);
-		}
-		if (m_FacingRight)
+		/* if (m_FacingRight)
 			Debug.Log("right " + m_FacingRight);
-		else
+		else {
 			Debug.Log("left " + !m_FacingRight);
-
-		flipCount ++;
+		} */
 	}
 }

@@ -20,7 +20,7 @@ public class playerMovement : MonoBehaviour
     private bool isJump = false;
     private bool isCrouch = false;
     public bool isControlled;
-    private int checkFlipCount;
+    private int toggleIndex = 1;
     [SerializeField] private bool isGhost;
     [SerializeField] private bool isNPC;
     [SerializeField] private Collider2D ghostEnableCollider;
@@ -126,7 +126,7 @@ public class playerMovement : MonoBehaviour
 
             // Parent Ghost
             if (dist < 1.0f) {
-                if (isParented < 1 && isGhost == true) {
+                if (isParented < 1 && isGhost == true && toggleIndex == 1) {
 
                     ghostEnableCollider.enabled = true;
                     ghostEnableRigidBody.isKinematic = false;
@@ -136,25 +136,35 @@ public class playerMovement : MonoBehaviour
 
                     isParented++;
 
-                    // Debug Flip Behavoiur
-                    checkFlipCount = controller.flipCount;
+                    isControlled = true;
+                    toggleIndex = 0;
+
                 }
-                else if (isParented > 0 && isGhost == true) {
+                else if (isParented > 0 && isGhost == true && toggleIndex == 0) {
 
                     ghostPos.transform.SetParent(playerPos.transform);
                     ghostRender.enabled = false;
-
-                    isControlled = false;
                     
                     isParented = 0;
 
                     ghostPos.transform.position = playerPos.transform.position;
+
+                    flipping ();
+
+                    isControlled = false;
+                    toggleIndex = 1;
                 }
 
-                if (isGhost == false) {
+                if (isGhost == false && toggleIndex == 0) {
 
                     isControlled = true;
+                    toggleIndex = 1;
                 }
+                else if (isGhost == false && toggleIndex == 1) {
+
+                    isControlled = false;
+                    toggleIndex = 0;
+                }                    
             }
             // switch users
             else if (dist > 1.0f) {
@@ -181,9 +191,18 @@ public class playerMovement : MonoBehaviour
     }
 
     // applies the data
-    void FixedUpdate() {
+    void FixedUpdate () {
 
         controller.Move(horizontalMove * Time.fixedDeltaTime, isCrouch, isJump);
         isJump = false;
+    }
+
+    // flip Fixing, kinda doesn't help
+    void flipping () {
+
+        if (playerPos.GetComponent<playerController>().m_FacingRight && !ghostPos.GetComponent<playerController>().m_FacingRight)
+            ghostPos.GetComponent<playerController>().Flip();
+        else if (!playerPos.GetComponent<playerController>().m_FacingRight && ghostPos.GetComponent<playerController>().m_FacingRight)
+            ghostPos.GetComponent<playerController>().Flip();
     }
 }
