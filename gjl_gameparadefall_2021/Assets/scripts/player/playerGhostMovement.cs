@@ -1,16 +1,16 @@
-// only using the basics, damn . . .
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour
+public class playerGhostMovement : MonoBehaviour
 {
-    public playerController controller;
-    public float walkSpeed = 35f;
-    public float sprintSpeed = 60f;
+    
+    public playerGhostController controller;
+    [SerializeField] private float walkSpeed = 35f;
+    [SerializeField] private float sprintSpeed = 60f;
     private float speed;
     private float horizontalMove = 0f;
-    private bool jump = false;
+    private float verticalMove = 0f;
     public bool isControlled;
 
 
@@ -25,12 +25,12 @@ public class playerMovement : MonoBehaviour
             else
                 speed = walkSpeed;
 
-            // moving
+            // moving (horizontal)
             horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
-            // jump
-            if (Input.GetAxisRaw("Jump") == 1f || Input.GetAxisRaw("Vertical") == 1f)
-                jump = true;
+            // moving (vertical)
+            verticalMove = Input.GetAxisRaw("Vertical") * speed;
+                
         }
     }
 
@@ -39,7 +39,6 @@ public class playerMovement : MonoBehaviour
     void FixedUpdate () {
 
         // Move Character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false /* Would be Crouch */, jump);
-        jump = false;
+        controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime, false /* Would be Crouch */, false /* Would be Jump */);
     }
 }

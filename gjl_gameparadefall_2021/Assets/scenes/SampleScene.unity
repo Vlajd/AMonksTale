@@ -147,11 +147,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23524525}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.494, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1942611884}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &94699424
 GameObject:
@@ -195,7 +195,7 @@ Transform:
   m_Children:
   - {fileID: 1922838403}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475434730
 GameObject:
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 475434733}
   m_Layer: 6
   m_Name: MainPlayer
-  m_TagString: Player
+  m_TagString: mainPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,8 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92de12716db4a0d45b5f34d3c9998db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFlipped: 0
-  flipCount: 0
   m_JumpForce: 400
   m_CrouchSpeed: 0.36
   m_MovementFading: 0.05
@@ -243,7 +241,7 @@ MonoBehaviour:
     m_Bits: 63
   m_GroundCheck: {fileID: 918421887}
   m_CeilingCheck: {fileID: 1376722146}
-  m_CrouchDisableCollider: {fileID: 475434737}
+  m_CrouchDisableCollider: {fileID: 0}
   m_FacingRight: 1
   OnLandEvent:
     m_PersistentCalls:
@@ -343,20 +341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62e3c802e87e5846bf863623822277b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPos: {fileID: 475434730}
-  ghostPos: {fileID: 583183089}
-  cam: {fileID: 519420028}
   controller: {fileID: 475434731}
   walkSpeed: 40
-  sprintSpeed: 64
-  characterSmoothing: 0
-  ghostSpeedDivide: 3
+  sprintSpeed: 60
   isControlled: 1
-  isGhost: 0
-  isNPC: 0
-  ghostEnableCollider: {fileID: 475434736}
-  ghostEnableRigidBody: {fileID: 475434734}
-  ghostRender: {fileID: 0}
 --- !u!61 &475434736
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -412,9 +400,8 @@ RectTransform:
   m_Children:
   - {fileID: 918421887}
   - {fileID: 1376722146}
-  - {fileID: 583183095}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -460,13 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bcbc3de7b99440429b1467fdfbf886d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTarget:
-  - {fileID: 475434738}
-  - {fileID: 583183095}
-  playerBool: {fileID: 475434730}
-  smoothing: 6
-  lowestY: -10
-  toggleValue: 0.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -538,9 +518,10 @@ GameObject:
   - component: {fileID: 583183092}
   - component: {fileID: 583183091}
   - component: {fileID: 583183090}
+  - component: {fileID: 583183096}
   m_Layer: 6
   m_Name: GhostPlayer
-  m_TagString: Player
+  m_TagString: ghostPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -554,23 +535,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 583183089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e62e3c802e87e5846bf863623822277b, type: 3}
+  m_Script: {fileID: 11500000, guid: 41c37ae0614766243b17015ac929d12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPos: {fileID: 475434730}
-  ghostPos: {fileID: 583183089}
-  cam: {fileID: 519420028}
   controller: {fileID: 583183091}
-  walkSpeed: 30
-  sprintSpeed: 200
-  characterSmoothing: 3.5
-  ghostSpeedDivide: 3
+  walkSpeed: 35
+  sprintSpeed: 60
   isControlled: 0
-  isGhost: 1
-  isNPC: 0
-  ghostEnableCollider: {fileID: 583183092}
-  ghostEnableRigidBody: {fileID: 583183093}
-  ghostRender: {fileID: 583183094}
 --- !u!114 &583183091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,18 +551,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 583183089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92de12716db4a0d45b5f34d3c9998db5, type: 3}
+  m_Script: {fileID: 11500000, guid: fa09ca464e87fe842bb1424fb326fc42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFlipped: 0
-  flipCount: 0
-  m_JumpForce: 0
+  m_JumpForce: 400
   m_CrouchSpeed: 0.36
   m_MovementFading: 0.05
   m_AirControl: 1
   m_GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 63
   m_GroundCheck: {fileID: 1373490240}
   m_CeilingCheck: {fileID: 1491840867}
   m_CrouchDisableCollider: {fileID: 0}
@@ -609,7 +578,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583183089}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: b175a877ef539884ab86c70226eba406, type: 2}
   m_IsTrigger: 1
@@ -708,14 +677,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583183089}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0022202134, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0022202134, y: -1.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1373490240}
   - {fileID: 1491840867}
-  m_Father: {fileID: 475434738}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583183096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583183089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c95fc7380bc6c4b9f75cc4656d5222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeRender: {fileID: 583183094}
+  mainCharacter: {fileID: 475434730}
+  ghostMovement: {fileID: 583183090}
 --- !u!1 &665202684
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,11 +724,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665202684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1942611884}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682050697
 GameObject:
@@ -882,6 +866,8 @@ GameObject:
   - component: {fileID: 903692689}
   - component: {fileID: 903692688}
   - component: {fileID: 903692687}
+  - component: {fileID: 903692691}
+  - component: {fileID: 903692692}
   m_Layer: 0
   m_Name: Square (2)
   m_TagString: box
@@ -1001,6 +987,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &903692691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903692686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b924736ade025345a767081f5c9b8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &903692692
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903692686}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6666667
 --- !u!1 &918421886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,10 +2483,10 @@ Transform:
   m_LocalPosition: {x: 17.2, y: -3.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 23524526}
   - {fileID: 665202685}
+  - {fileID: 23524526}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1942611885
 MonoBehaviour:
@@ -2486,15 +2500,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92de12716db4a0d45b5f34d3c9998db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFlipped: 0
-  flipCount: 0
-  m_JumpForce: 400
+  m_JumpForce: 50
   m_CrouchSpeed: 0.36
   m_MovementFading: 0.05
-  m_AirControl: 0
+  m_AirControl: 1
   m_GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 63
   m_GroundCheck: {fileID: 23524526}
   m_CeilingCheck: {fileID: 665202685}
   m_CrouchDisableCollider: {fileID: 0}
