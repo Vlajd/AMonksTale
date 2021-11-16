@@ -5,7 +5,8 @@ using UnityEngine;
 public class playerGhostMovement : MonoBehaviour
 {
     
-    public playerGhostController controller;
+    [SerializeField] private playerGhostController controller;
+    [SerializeField] private GameObject gameManager;
     [SerializeField] private float walkSpeed = 35f;
     [SerializeField] private float sprintSpeed = 60f;
     private float speed;
@@ -26,10 +27,16 @@ public class playerGhostMovement : MonoBehaviour
                 speed = walkSpeed;
 
             // moving (horizontal)
-            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;                
 
             // moving (vertical)
             verticalMove = Input.GetAxisRaw("Vertical") * speed;
+
+            // cancel if past world limmits
+            if (transform.position.y < gameManager.GetComponent<gameManager>().minY && verticalMove < 0f)
+                verticalMove = 1f;
+            else if (transform.position.y > gameManager.GetComponent<gameManager>().maxY && verticalMove > 0f)
+                verticalMove = -1f;
                 
         }
     }

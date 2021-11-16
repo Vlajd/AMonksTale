@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour
+public class playerNPCMovement : MonoBehaviour
 {
-    [SerializeField] private playerController controller;
+    [SerializeField] private playerNPCController controller;
     public float walkSpeed = 35f;
     public float sprintSpeed = 60f;
     private float speed;
-    public float horizontalMove = 0f;
+    private float horizontalMove = 0f;
     private bool jump = false;
     public bool isControlled;
-
 
     // Update
     void Update () {
 
-        if (isControlled){
+        // initialize
+        if (isControlled) {
 
             // set speed
             if (Input.GetAxisRaw("Sprint") == 1f)
