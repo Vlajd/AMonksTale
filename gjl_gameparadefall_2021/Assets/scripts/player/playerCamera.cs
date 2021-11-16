@@ -11,6 +11,7 @@ public class playerCamera : MonoBehaviour
     public float lowestY;
     Vector3 targetCamPos;
     float i;
+    public float toggleValue;
 
     void Start () {
 

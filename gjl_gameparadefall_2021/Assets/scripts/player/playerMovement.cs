@@ -40,7 +40,7 @@ public class playerMovement : MonoBehaviour
         }
 
         // Checks every few seconds divided by idk how much for input on E
-        InvokeRepeating("toggle", 0.3f, 0.3f);
+        InvokeRepeating("toggle", cam.GetComponent<playerCamera>().toggleValue, 1f);
     }
 
     void Update() {

@@ -466,6 +466,7 @@ MonoBehaviour:
   playerBool: {fileID: 475434730}
   smoothing: 6
   lowestY: -10
+  toggleValue: 0.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
