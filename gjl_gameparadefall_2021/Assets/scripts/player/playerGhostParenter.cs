@@ -11,7 +11,7 @@ public class playerGhostParenter : MonoBehaviour
     [SerializeField] private playerGhostMovement ghostMovement;
     [SerializeField] private float mergeDistance = 1f;
     private float mainCharacterDistance;
-    [SerializeField] private GameObject[] m_NPC = new GameObject[3];
+    public GameObject[] m_NPC = new GameObject[3];
     private float m_NPCdist;
     public bool isNPCParent = false;
     private int NPCIndex;
