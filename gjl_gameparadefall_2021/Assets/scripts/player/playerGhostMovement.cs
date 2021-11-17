@@ -10,8 +10,8 @@ public class playerGhostMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 35f;
     [SerializeField] private float sprintSpeed = 60f;
     private float speed;
-    private float horizontalMove = 0f;
-    private float verticalMove = 0f;
+    public float horizontalMove = 0f;
+    public float verticalMove = 0f;
     public bool isControlled;
 
 

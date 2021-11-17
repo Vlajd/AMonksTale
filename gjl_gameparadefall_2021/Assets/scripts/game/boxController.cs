@@ -15,6 +15,7 @@ public class boxController : MonoBehaviour
             s_player = GameObject.FindGameObjectsWithTag("mainPlayer");
 
         if (s_npc == null)
+            s_npc = new GameObject[ghost.GetComponent<playerGhostParenter>().m_NPCCount];
             s_npc = GameObject.FindGameObjectsWithTag("npcPlayer"); 
     } 
   
@@ -25,10 +26,11 @@ public class boxController : MonoBehaviour
             s_player[0].GetComponent<playerMovement>().sprintSpeed -= speedReduction * 2;
         }   
         else if (other.tag == "npcPlayer") {
-            
-            for (int i = 0; i < ghost.GetComponent<playerGhostParenter>().m_NPC.Length; i++) {
-                s_player[i].GetComponent<playerMovement>().walkSpeed -= speedReduction;
-                s_player[i].GetComponent<playerMovement>().sprintSpeed -= speedReduction * 2;
+        
+            for (int i = 0; i < ghost.GetComponent<playerGhostParenter>().m_NPCCount; i++) {
+                s_npc[i].GetComponent<playerNPCMovement>().walkSpeed -= speedReduction;
+                s_npc[i].GetComponent<playerNPCMovement>().sprintSpeed -= speedReduction * 2;
+
             }
         }
     }
@@ -40,10 +42,11 @@ public class boxController : MonoBehaviour
             s_player[0].GetComponent<playerMovement>().sprintSpeed += speedReduction * 2;
         }
         else if (other.tag == "npcPlayer") {
-            
-            for (int i = 0; i < ghost.GetComponent<playerGhostParenter>().m_NPC.Length; i++) {
-                s_player[i].GetComponent<playerMovement>().walkSpeed += speedReduction;
-                s_player[i].GetComponent<playerMovement>().sprintSpeed += speedReduction * 2;
+        
+            for (int i = 0; i < ghost.GetComponent<playerGhostParenter>().m_NPCCount; i++) {
+                s_npc[i].GetComponent<playerNPCMovement>().walkSpeed += speedReduction;
+                s_npc[i].GetComponent<playerNPCMovement>().sprintSpeed += speedReduction * 2;
+
             }
         }
     }

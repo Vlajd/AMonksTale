@@ -8,7 +8,8 @@ public class playerCamera : MonoBehaviour
     [SerializeField] private GameObject ghostCharacter;
     [SerializeField] private float smoothing;
     [SerializeField] private float lowestY;
-    private Vector3 offset;
+    public Vector3 offset;
+    public float externalOffset;
     private Vector3 wantedCamPos;
 
     void Start () {
@@ -22,11 +23,11 @@ public class playerCamera : MonoBehaviour
 
         // check if main is controlled
         if (mainCharacter.GetComponent<playerMovement>().isControlled)
-            wantedCamPos = mainCharacter.transform.position + offset;
+            wantedCamPos = mainCharacter.transform.position + offset + new Vector3(0, externalOffset, 0);
 
         // check if ghost is controlled
         else if (ghostCharacter.GetComponent<playerGhostMovement>().isControlled || ghostCharacter.GetComponent<playerGhostParenter>().isNPCParent)
-            wantedCamPos = ghostCharacter.transform.position + offset;
+            wantedCamPos = ghostCharacter.transform.position + offset + new Vector3(0, externalOffset, 0);
 
         transform.position = Vector3.Lerp(transform.position, wantedCamPos, smoothing * Time.deltaTime);
 

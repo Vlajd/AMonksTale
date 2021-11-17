@@ -11,10 +11,11 @@ public class playerGhostParenter : MonoBehaviour
     [SerializeField] private playerGhostMovement ghostMovement;
     [SerializeField] private float mergeDistance = 1f;
     private float mainCharacterDistance;
+    public int m_NPCCount = 3;
     public GameObject[] m_NPC = new GameObject[3];
     private float m_NPCdist;
     public bool isNPCParent = false;
-    private int NPCIndex;
+    public int NPCIndex;
 
 
     // Start
@@ -53,6 +54,8 @@ public class playerGhostParenter : MonoBehaviour
                 m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = true;
                 mainCharacter.GetComponent<playerMovement>().isControlled = false;
             }
+
+            cancelHorizontalMovement();
         }
 
         if (Input.GetKeyDown("q")) {
@@ -60,7 +63,7 @@ public class playerGhostParenter : MonoBehaviour
             CheckDistanceToPlayer();
 
             // distance to NPCs
-            if (isActive && mainCharacterDistance > mergeDistance) {
+            if (isActive && mainCharacterDistance > mergeDistance && !mainCharacter.GetComponent<playerMovement>().isControlled) {
 
                 for (int i = 0; i < m_NPC.Length; i++) {
 
@@ -74,7 +77,7 @@ public class playerGhostParenter : MonoBehaviour
                 }
             }
             // deactivate
-            else if (isActive && !isNPCParent && mainCharacterDistance < mergeDistance) {
+            else if (isActive && !isNPCParent && mainCharacterDistance < mergeDistance && !m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled) {
 
                 deactivateFromMain();
             }
@@ -88,6 +91,8 @@ public class playerGhostParenter : MonoBehaviour
 
                 activateFromMain();
             }
+
+            cancelHorizontalMovement();
         }
 
         // keep "parented"
@@ -144,5 +149,13 @@ public class playerGhostParenter : MonoBehaviour
 
         // distance to player
         mainCharacterDistance = Vector3.Distance(transform.position, mainCharacter.transform.position);
+    }
+
+    void cancelHorizontalMovement () {
+
+        mainCharacter.GetComponent<playerMovement>().horizontalMove = 0;
+        m_NPC[NPCIndex].GetComponent<playerNPCMovement>().horizontalMove = 0;
+        ghostMovement.GetComponent<playerGhostMovement>().horizontalMove = 0;
+        ghostMovement.GetComponent<playerGhostMovement>().verticalMove = 0;
     }
 }

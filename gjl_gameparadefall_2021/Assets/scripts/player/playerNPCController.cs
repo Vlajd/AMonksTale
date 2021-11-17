@@ -47,7 +47,7 @@ public class playerNPCController : MonoBehaviour
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_GroundLayer);
 		for (int i = 0; i < colliders.Length; i++) {
-			if (colliders[i].gameObject != gameObject) {
+			if (colliders[i].gameObject != gameObject && !colliders[i].isTrigger) {
 				m_Grounded = true;
 
 				if (!wasGrounded) {
@@ -62,7 +62,7 @@ public class playerNPCController : MonoBehaviour
 
 		if (!crouch) {
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_GroundLayer)) {
-				crouch = true;
+				crouch = false;
 			}
 		}
 
