@@ -6,15 +6,30 @@ public class buttonPlate : MonoBehaviour
 {
     public bool isPressed = false;
     public int references = 0;
+    [SerializeField] private float yValue = 0;
+    private float originalY;
+
+    void Start () {
+
+        originalY = transform.position.y;
+    }
 
     public void OnTriggerEnter2D(Collider2D col) {
 
-        references = references + 1;
+        if (!col.isTrigger) {
+
+            references ++;
+            buttonPress();
+        }
     }
 
     public void OnTriggerExit2D(Collider2D col) {
 
-        references = references - 1;
+        if (!col.isTrigger) {
+            
+            references --;
+            buttonRelease();
+        }
     }
 
     public void Update() {
@@ -23,9 +38,23 @@ public class buttonPlate : MonoBehaviour
 
             isPressed = true;
         }
-        else {
+        else if (references <= 0) {
 
             isPressed = false;
+        }
+        
+    }
+
+    void buttonPress () {
+
+        if (!isPressed && references > 0)
+            transform.position = new Vector3(transform.position.x, transform.position.y - yValue, transform.position.z);
+    }
+
+    void buttonRelease () {
+
+        if (isPressed && references <= 0) {
+            transform.position = new Vector3(transform.position.x, originalY, transform.position.z);
         }
     }
 }
