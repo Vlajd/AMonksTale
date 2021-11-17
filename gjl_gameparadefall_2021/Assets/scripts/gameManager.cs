@@ -10,6 +10,12 @@ public class gameManager : MonoBehaviour
     public float maxY = 50f;
     [SerializeField] private GameObject mainPlayer;
     [SerializeField] private GameObject ghostPlayer;
+    [SerializeField] private GameObject canvas;
+    
+    void Start () {
+
+        canvas.SetActive(true);
+    }
 
     void Update () {
 

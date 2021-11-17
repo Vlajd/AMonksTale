@@ -1266,6 +1266,7 @@ MonoBehaviour:
   mainCharacter: {fileID: 475434730}
   ghostMovement: {fileID: 583183090}
   mergeDistance: 1
+  NPCCount: 3
   m_NPC:
   - {fileID: 1942611880}
   - {fileID: 1846278511}
@@ -1569,7 +1570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &751124158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,6 +1922,7 @@ MonoBehaviour:
   maxY: 50
   mainPlayer: {fileID: 475434730}
   ghostPlayer: {fileID: 583183089}
+  canvas: {fileID: 751124157}
 --- !u!4 &965701518
 Transform:
   m_ObjectHideFlags: 0
@@ -2361,6 +2363,7 @@ MonoBehaviour:
   controller: {fileID: 1846278513}
   walkSpeed: 35
   sprintSpeed: 60
+  horizontalMove: 0
   isControlled: 0
 --- !u!114 &1846278513
 MonoBehaviour:
@@ -3854,6 +3857,7 @@ MonoBehaviour:
   controller: {fileID: 1942611886}
   walkSpeed: 35
   sprintSpeed: 60
+  horizontalMove: 0
   isControlled: 0
 --- !u!114 &1942611886
 MonoBehaviour:
@@ -3920,6 +3924,7 @@ MonoBehaviour:
   controller: {fileID: 2032094490}
   walkSpeed: 35
   sprintSpeed: 60
+  horizontalMove: 0
   isControlled: 0
 --- !u!114 &2032094490
 MonoBehaviour:

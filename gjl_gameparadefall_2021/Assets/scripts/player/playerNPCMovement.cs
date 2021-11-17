@@ -9,7 +9,7 @@ public class playerNPCMovement : MonoBehaviour
     public float walkSpeed = 35f;
     public float sprintSpeed = 60f;
     private float speed;
-    private float horizontalMove = 0f;
+    public float horizontalMove = 0f;
     private bool jump = false;
     public bool isControlled;
 

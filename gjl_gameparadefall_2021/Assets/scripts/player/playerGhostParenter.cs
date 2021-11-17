@@ -12,7 +12,7 @@ public class playerGhostParenter : MonoBehaviour
     [SerializeField] private float mergeDistance = 1f;
     private float mainCharacterDistance;
     [SerializeField] private GameObject[] m_NPC = new GameObject[3];
-    private float[] m_NPCdist = new float[3];
+    private float m_NPCdist;
     public bool isNPCParent = false;
     private int NPCIndex;
 
@@ -29,16 +29,10 @@ public class playerGhostParenter : MonoBehaviour
         
         if (Input.GetKeyDown("e")) {
             
-            // distance to player
-            mainCharacterDistance = Vector3.Distance(transform.position, mainCharacter.transform.position);
+            CheckDistanceToPlayer();
 
-            // activate
-            if (!isActive && !isNPCParent) {
-
-                activateFromMain();
-            }
             // toggle
-            else if (isActive && !isNPCParent && mainCharacterDistance > mergeDistance && ghostMovement.isControlled && !mainCharacter.GetComponent<playerMovement>().isControlled) {
+            if (isActive && !isNPCParent && mainCharacterDistance > mergeDistance && ghostMovement.isControlled && !mainCharacter.GetComponent<playerMovement>().isControlled) {
 
                 ghostMovement.isControlled = false;
                 mainCharacter.GetComponent<playerMovement>().isControlled = true;
@@ -47,11 +41,6 @@ public class playerGhostParenter : MonoBehaviour
 
                 ghostMovement.isControlled = true;
                 mainCharacter.GetComponent<playerMovement>().isControlled = false;
-            }
-            // deactivate
-            else if (isActive && !isNPCParent && mainCharacterDistance < mergeDistance) {
-
-                deactivateFromMain();
             }
             // toggle when he is NPC
             else if (!isActive && isNPCParent && m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled && !mainCharacter.GetComponent<playerMovement>().isControlled) {
@@ -68,23 +57,36 @@ public class playerGhostParenter : MonoBehaviour
 
         if (Input.GetKeyDown("q")) {
 
+            CheckDistanceToPlayer();
+
             // distance to NPCs
-            if (isActive) {
+            if (isActive && mainCharacterDistance > mergeDistance) {
 
                 for (int i = 0; i < m_NPC.Length; i++) {
 
-                    m_NPCdist[i] = Vector3.Distance(transform.position, m_NPC[i].transform.position);
+                    m_NPCdist = Vector3.Distance(transform.position, m_NPC[i].transform.position);
 
-                    if (m_NPCdist[i] < 1f) {
+                    if (m_NPCdist < 1f) {
 
                         NPCIndex = i;
                         deactivateFromNPC();
                     }
                 }
             }
+            // deactivate
+            else if (isActive && !isNPCParent && mainCharacterDistance < mergeDistance) {
+
+                deactivateFromMain();
+            }
+            // activate from NPC
             else if (!isActive && isNPCParent && !mainCharacter.GetComponent<playerMovement>().isControlled) {
 
                 activateFromNPC();
+            }
+            // activate
+            else if (!isActive && !isNPCParent) {
+
+                activateFromMain();
             }
         }
 
@@ -115,6 +117,7 @@ public class playerGhostParenter : MonoBehaviour
         activeRender.enabled = true;
         ghostMovement.isControlled = true;
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = false;
+        m_NPC[NPCIndex].GetComponent<playerNPCMovement>().horizontalMove = 0;
         isActive = true;
         isNPCParent = false;
     }
@@ -135,5 +138,11 @@ public class playerGhostParenter : MonoBehaviour
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = true;
         isActive = false;
         isNPCParent = true;
+    }
+
+    void CheckDistanceToPlayer () {
+
+        // distance to player
+        mainCharacterDistance = Vector3.Distance(transform.position, mainCharacter.transform.position);
     }
 }
