@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerGhostMovement : MonoBehaviour
 {
     
+    [SerializeField] private Animator animator;
     [SerializeField] private playerGhostController controller;
     [SerializeField] private GameObject gameManager;
     [SerializeField] private float walkSpeed = 35f;
@@ -39,6 +40,8 @@ public class playerGhostMovement : MonoBehaviour
                 verticalMove = -1f;
                 
         }
+
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
     }
 
 

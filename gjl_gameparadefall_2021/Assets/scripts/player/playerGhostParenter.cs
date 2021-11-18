@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerGhostParenter : MonoBehaviour
 {
-
+    [SerializeField] private Animator animator;
     private bool isActive = false;
     [SerializeField] private SpriteRenderer activeRender;
     [SerializeField] private GameObject mainCharacter;
@@ -20,7 +20,7 @@ public class playerGhostParenter : MonoBehaviour
 
     // Start
     void Start() {
-        
+
         if (!isActive)
             activeRender.enabled = false;
     }
@@ -110,6 +110,10 @@ public class playerGhostParenter : MonoBehaviour
     // "parent" and "unparent"
     void activateFromMain () {
 
+        // animation
+        animator.SetInteger("mergeInt", 1);
+        animator.SetBool("isMerging", true);
+
         activeRender.enabled = true;
         ghostMovement.isControlled = true;
         mainCharacter.GetComponent<playerMovement>().isControlled = false;
@@ -118,6 +122,10 @@ public class playerGhostParenter : MonoBehaviour
     }
 
     public void activateFromNPC () {
+
+        // animation
+        animator.SetInteger("mergeInt", 1);
+        animator.SetBool("isMerging", true);
 
         activeRender.enabled = true;
         ghostMovement.isControlled = true;
@@ -129,7 +137,10 @@ public class playerGhostParenter : MonoBehaviour
 
     void deactivateFromMain () {
 
-        activeRender.enabled = false;
+        // animation
+        animator.SetInteger("mergeInt", 2);
+        animator.SetBool("isMerging", true);
+
         ghostMovement.isControlled = false;
         mainCharacter.GetComponent<playerMovement>().isControlled = true;
         isActive = false;
@@ -138,7 +149,10 @@ public class playerGhostParenter : MonoBehaviour
 
     void deactivateFromNPC () {
 
-        activeRender.enabled = false;
+        // animation
+        animator.SetInteger("mergeInt", 2);
+        animator.SetBool("isMerging", true);
+
         ghostMovement.isControlled = false;
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = true;
         isActive = false;
@@ -157,5 +171,16 @@ public class playerGhostParenter : MonoBehaviour
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().horizontalMove = 0;
         ghostMovement.GetComponent<playerGhostMovement>().horizontalMove = 0;
         ghostMovement.GetComponent<playerGhostMovement>().verticalMove = 0;
+    }
+
+    public void animationDone () {
+
+        animator.SetBool("isMerging", false);
+    }
+
+    public void animationDoneMerging () {
+
+        animator.SetBool("isMerging", false);
+        activeRender.enabled = false;
     }
 }

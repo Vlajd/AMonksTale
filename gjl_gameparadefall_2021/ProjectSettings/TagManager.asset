@@ -48,3 +48,6 @@ TagManager:
   - name: Floor
     uniqueID: 479420003
     locked: 0
+  - name: ghost
+    uniqueID: 2336026945
+    locked: 0
