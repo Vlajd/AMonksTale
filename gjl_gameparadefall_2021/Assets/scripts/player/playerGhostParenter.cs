@@ -10,6 +10,7 @@ public class playerGhostParenter : MonoBehaviour
     [SerializeField] private GameObject mainCharacter;
     [SerializeField] private playerGhostMovement ghostMovement;
     [SerializeField] private float mergeDistance = 1f;
+    [SerializeField] private GameObject gameManager;
     private float mainCharacterDistance;
     public int m_NPCCount = 3;
     public GameObject[] m_NPC = new GameObject[3];
@@ -28,7 +29,7 @@ public class playerGhostParenter : MonoBehaviour
     // Update
     void Update() {
         
-        if (Input.GetKeyDown("e")) {
+        if (Input.GetKeyDown("r")) {
             
             CheckDistanceToPlayer();
 
@@ -104,6 +105,17 @@ public class playerGhostParenter : MonoBehaviour
 
             transform.position = m_NPC[NPCIndex].transform.position;
         }
+
+        // unparent when npc below camera limit
+        if (!isActive && isNPCParent && m_NPC[NPCIndex].transform.position.y < gameManager.GetComponent<gameManager>().minY) {
+
+            gameManager.GetComponent<gameManager>().pressRestartButton();
+        }
+
+        // error correction
+
+        if (isActive)
+            activeRender.enabled = true;
     }
 
 

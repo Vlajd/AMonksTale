@@ -8,6 +8,11 @@ TagManager:
   - mainPlayer
   - ghostPlayer
   - npcPlayer
+  - item1
+  - item2
+  - item3
+  - item4
+  - gameManager
   layers:
   - Default
   - TransparentFX
@@ -18,7 +23,7 @@ TagManager:
   - Player
   - Button
   - Box
-  - 
+  - item
   - 
   - 
   - 

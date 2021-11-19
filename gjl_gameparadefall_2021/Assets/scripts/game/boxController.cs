@@ -24,6 +24,7 @@ public class boxController : MonoBehaviour
         if (other.tag == "mainPlayer") {
             s_player[0].GetComponent<playerMovement>().walkSpeed -= speedReduction;
             s_player[0].GetComponent<playerMovement>().sprintSpeed -= speedReduction * 2;
+            s_player[0].GetComponent<Animator>().SetBool("isBoxPushed", true);
         }   
         else if (other.tag == "npcPlayer") {
         
@@ -40,6 +41,7 @@ public class boxController : MonoBehaviour
         if (other.tag == "mainPlayer") {
             s_player[0].GetComponent<playerMovement>().walkSpeed += speedReduction;
             s_player[0].GetComponent<playerMovement>().sprintSpeed += speedReduction * 2;
+            s_player[0].GetComponent<Animator>().SetBool("isBoxPushed", false);
         }
         else if (other.tag == "npcPlayer") {
         
