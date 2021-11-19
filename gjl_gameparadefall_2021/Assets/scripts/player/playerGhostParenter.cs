@@ -13,7 +13,7 @@ public class playerGhostParenter : MonoBehaviour
     [SerializeField] private GameObject gameManager;
     private float mainCharacterDistance;
     public int m_NPCCount = 3;
-    public GameObject[] m_NPC = new GameObject[3];
+    public GameObject[] m_NPC = new GameObject[5];
     private float m_NPCdist;
     public bool isNPCParent = false;
     public int NPCIndex;

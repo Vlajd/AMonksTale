@@ -6,6 +6,7 @@ public class itemController : MonoBehaviour
 {
     public int ItemIndex;
     [SerializeField] private GameObject player;
+    [SerializeField] private float lerpValue = 3f;
     public bool playerPickUp = false;
 
     void OnTriggerEnter2D (Collider2D other) {
@@ -27,6 +28,6 @@ public class itemController : MonoBehaviour
     void Update () {
 
         if (playerPickUp && player.GetComponent<playerMovement>().isCarrying)
-            gameObject.transform.position = player.transform.position;
+            gameObject.transform.position = Vector3.Lerp(transform.position, player.transform.position, lerpValue);
     }
 }
