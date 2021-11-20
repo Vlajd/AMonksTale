@@ -53,9 +53,15 @@ TagManager:
   - name: Floor
     uniqueID: 479420003
     locked: 0
+  - name: main
+    uniqueID: 184603059
+    locked: 0
+  - name: box
+    uniqueID: 2534199639
+    locked: 0
   - name: ghost
     uniqueID: 2336026945
     locked: 0
-  - name: main
-    uniqueID: 184603059
+  - name: fade
+    uniqueID: 1536156281
     locked: 0

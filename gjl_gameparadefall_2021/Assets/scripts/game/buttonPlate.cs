@@ -8,6 +8,7 @@ public class buttonPlate : MonoBehaviour
     public int references = 0;
     [SerializeField] private float yValue = 0;
     private float originalY;
+    public Animator doorAnim;
 
     void Start () {
 
@@ -47,14 +48,19 @@ public class buttonPlate : MonoBehaviour
 
     void buttonPress () {
 
-        if (!isPressed && references > 0)
+        if (!isPressed && references > 0){
+
             transform.position = new Vector3(transform.position.x, transform.position.y - yValue, transform.position.z);
+            doorAnim.Play("anim_DoorOpen");
+        }
     }
 
     void buttonRelease () {
 
         if (isPressed && references <= 0) {
+
             transform.position = new Vector3(transform.position.x, originalY, transform.position.z);
-        }
+            doorAnim.Play("anim_DoorClose");
+        }   
     }
 }

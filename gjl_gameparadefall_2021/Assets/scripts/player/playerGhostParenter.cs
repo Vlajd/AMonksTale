@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerGhostParenter : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    public cameraShake cameraShake;
     private bool isActive = false;
     [SerializeField] private SpriteRenderer activeRender;
     [SerializeField] private GameObject mainCharacter;
@@ -17,6 +18,8 @@ public class playerGhostParenter : MonoBehaviour
     private float m_NPCdist;
     public bool isNPCParent = false;
     public int NPCIndex;
+    [SerializeField] private float camShakeDuration = 0.5f;
+    [SerializeField] private float camShakeMagnitude = 0.4f;
 
 
     // Start
@@ -126,6 +129,9 @@ public class playerGhostParenter : MonoBehaviour
         animator.SetInteger("mergeInt", 1);
         animator.SetBool("isMerging", true);
 
+        // camShake
+        StartCoroutine(cameraShake.Shake(camShakeDuration, camShakeMagnitude));
+
         activeRender.enabled = true;
         ghostMovement.isControlled = true;
         mainCharacter.GetComponent<playerMovement>().isControlled = false;
@@ -138,6 +144,9 @@ public class playerGhostParenter : MonoBehaviour
         // animation
         animator.SetInteger("mergeInt", 1);
         animator.SetBool("isMerging", true);
+
+        // camShake
+        StartCoroutine(cameraShake.Shake(camShakeDuration, camShakeMagnitude));
 
         activeRender.enabled = true;
         ghostMovement.isControlled = true;
@@ -153,6 +162,9 @@ public class playerGhostParenter : MonoBehaviour
         animator.SetInteger("mergeInt", 2);
         animator.SetBool("isMerging", true);
 
+        // camShake
+        StartCoroutine(cameraShake.Shake(camShakeDuration, camShakeMagnitude));
+
         ghostMovement.isControlled = false;
         mainCharacter.GetComponent<playerMovement>().isControlled = true;
         isActive = false;
@@ -164,6 +176,9 @@ public class playerGhostParenter : MonoBehaviour
         // animation
         animator.SetInteger("mergeInt", 2);
         animator.SetBool("isMerging", true);
+
+        // camShake
+        StartCoroutine(cameraShake.Shake(camShakeDuration, camShakeMagnitude));
 
         ghostMovement.isControlled = false;
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = true;

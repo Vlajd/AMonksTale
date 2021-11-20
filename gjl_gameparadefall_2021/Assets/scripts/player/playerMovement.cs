@@ -42,6 +42,8 @@ public class playerMovement : MonoBehaviour
 
             if (Input.GetKeyDown("e")) {
 
+                Meditating();
+
                 for (int i = 0; i < 5; i++) {
 
                     if (Vector3.Distance(item[i].transform.position, transform.position) < itemPickUpRange && !isCarrying && playerIsInBounds) {
@@ -81,5 +83,10 @@ public class playerMovement : MonoBehaviour
     public void hasDoneJumping () {
 
         animator.SetBool("hasJumped", false);
+    }
+
+    void Meditating () {
+
+        animator.SetBool("hasMoved", true);
     }
 }

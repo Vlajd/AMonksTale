@@ -12,9 +12,14 @@ public class itemPuzzleController : MonoBehaviour
             droppers[1].GetComponent<itemDropController>().isRight &&
             droppers[2].GetComponent<itemDropController>().isRight &&
             droppers[3].GetComponent<itemDropController>().isRight &&
-            droppers[4].GetComponent<itemDropController>().isRight)
+            droppers[4].GetComponent<itemDropController>().isRight) {
+                
             gameObject.GetComponent<Collider2D>().enabled = false;
-        else
+            gameObject.GetComponent<Animator>().Play("anim_DoorOpen");
+        }
+        else {
             gameObject.GetComponent<Collider2D>().enabled = true;
+            gameObject.GetComponent<Animator>().Play("anim_DoorOpen");
+        }
     }
 }
