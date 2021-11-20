@@ -56,6 +56,9 @@ TagManager:
   - name: main
     uniqueID: 184603059
     locked: 0
+  - name: npc
+    uniqueID: 1606211397
+    locked: 0
   - name: box
     uniqueID: 2534199639
     locked: 0
