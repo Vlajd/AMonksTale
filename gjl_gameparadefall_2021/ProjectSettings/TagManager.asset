@@ -56,3 +56,6 @@ TagManager:
   - name: ghost
     uniqueID: 2336026945
     locked: 0
+  - name: main
+    uniqueID: 184603059
+    locked: 0
