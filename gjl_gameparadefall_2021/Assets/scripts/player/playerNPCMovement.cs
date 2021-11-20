@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class playerNPCMovement : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     [SerializeField] private playerNPCController controller;
     public float walkSpeed = 35f;
     public float sprintSpeed = 60f;
@@ -32,6 +33,8 @@ public class playerNPCMovement : MonoBehaviour
             if (Input.GetAxisRaw("Jump") == 1f || Input.GetAxisRaw("Vertical") == 1f)
                 jump = true;
         }
+
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
     }
 
 

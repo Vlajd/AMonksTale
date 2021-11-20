@@ -6,7 +6,7 @@ public class levelFade : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer[] spriteRenderer = new SpriteRenderer[4];
     private bool hasEntered = false;
-    private Color color = new Color32(0, 0, 0, 1);
+    private Color color = new Color32(0, 0, 0, 2);
 
     void Start () {
 

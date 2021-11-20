@@ -31,6 +31,7 @@ public class boxController : MonoBehaviour
             for (int i = 0; i < ghost.GetComponent<playerGhostParenter>().m_NPCCount; i++) {
                 s_npc[i].GetComponent<playerNPCMovement>().walkSpeed -= speedReduction;
                 s_npc[i].GetComponent<playerNPCMovement>().sprintSpeed -= speedReduction * 2;
+                s_npc[i].GetComponent<Animator>().SetBool("isBoxPushed", true);
 
             }
         }
@@ -48,6 +49,7 @@ public class boxController : MonoBehaviour
             for (int i = 0; i < ghost.GetComponent<playerGhostParenter>().m_NPCCount; i++) {
                 s_npc[i].GetComponent<playerNPCMovement>().walkSpeed += speedReduction;
                 s_npc[i].GetComponent<playerNPCMovement>().sprintSpeed += speedReduction * 2;
+                s_npc[i].GetComponent<Animator>().SetBool("isBoxPushed", false);
 
             }
         }

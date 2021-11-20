@@ -9,13 +9,13 @@ public class itemDropController : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private GameObject[] a_items = new GameObject[5];
     [SerializeField] private GameObject player;
-    private float objDist;
+    [SerializeField] private GameObject lowerRadius;
     public bool isRight;
 
     void Update () {
 
         // rightBre
-        if (Vector3.Distance(item.transform.position, transform.position) < radius)
+        if (Vector3.Distance(item.transform.position, transform.position) < radius || Vector3.Distance(item.transform.position, lowerRadius.transform.position) < radius)
             isRight = true;
         else
             isRight = false;
@@ -34,9 +34,7 @@ public class itemDropController : MonoBehaviour
 
         for (int i = 0; i < 5; i++) {
 
-            objDist = Vector3.Distance(transform.position, a_items[i].transform.position);
-
-            if (objDist < radius) {
+            if (Vector3.Distance(transform.position, a_items[i].transform.position) < radius || Vector3.Distance(transform.position, a_items[i].transform.position) < radius) {
 
                 a_items[i].transform.position = transform.position;
             }
