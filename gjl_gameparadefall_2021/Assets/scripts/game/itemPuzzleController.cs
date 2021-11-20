@@ -19,7 +19,7 @@ public class itemPuzzleController : MonoBehaviour
         }
         else {
             gameObject.GetComponent<Collider2D>().enabled = true;
-            gameObject.GetComponent<Animator>().Play("anim_DoorOpen");
+            gameObject.GetComponent<Animator>().Play("anim_DoorClose");
         }
     }
 }
