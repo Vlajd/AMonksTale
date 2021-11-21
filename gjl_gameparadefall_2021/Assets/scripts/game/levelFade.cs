@@ -19,12 +19,13 @@ public class levelFade : MonoBehaviour
         if (other.gameObject.CompareTag("mainPlayer")) {
 
             hasEntered = true;
+            ghost.GetComponent<Collider2D>().isTrigger = true;
         }
-        else if (other.gameObject.CompareTag("npcPlayer")) {
+        else if (other.gameObject.CompareTag("npcPlayer") && !hasEntered) {
 
             gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
-        else if (other.gameObject.CompareTag("ghostPlayer") && !other.gameObject.CompareTag("mainPlayer")) {
+        else if (other.gameObject.CompareTag("ghostPlayer") && !other.gameObject.CompareTag("mainPlayer") && !hasEntered) {
 
             gameObject.GetComponent<Collider2D>().isTrigger = false;
             ghost.GetComponent<Collider2D>().isTrigger = false;
