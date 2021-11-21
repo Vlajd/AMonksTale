@@ -22,11 +22,11 @@ public class levelFade : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("npcPlayer")) {
 
-            gameObject.GetComponent<Collider2D>().isTrigger = true;
+            gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
-        else if (other.gameObject.CompareTag("ghostPlayer")) {
+        else if (other.gameObject.CompareTag("ghostPlayer") && !other.gameObject.CompareTag("mainPlayer")) {
 
-            gameObject.GetComponent<Collider2D>().isTrigger = true;
+            gameObject.GetComponent<Collider2D>().isTrigger = false;
             ghost.GetComponent<Collider2D>().isTrigger = false;
         }
     }
@@ -37,9 +37,9 @@ public class levelFade : MonoBehaviour
 
             gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
-        else if (other.gameObject.CompareTag("ghostPlayer")) {
+        else if (other.gameObject.CompareTag("ghostPlayer") && !other.gameObject.CompareTag("mainPlayer")) {
 
-            gameObject.GetComponent<Collider2D>().isTrigger = false;
+            gameObject.GetComponent<Collider2D>().isTrigger = true;
             ghost.GetComponent<Collider2D>().isTrigger = true;
         }
     }
