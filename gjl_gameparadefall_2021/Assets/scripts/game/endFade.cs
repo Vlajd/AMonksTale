@@ -12,6 +12,7 @@ public class endFade : MonoBehaviour
 
             Debug.Log("isInside");
             toMain();
+            Cursor.lockState = CursorLockMode.None;
         }            
     }
 
