@@ -21,7 +21,7 @@ public class levelFade : MonoBehaviour
             hasEntered = true;
             ghost.GetComponent<Collider2D>().isTrigger = true;
         }
-        else if (other.gameObject.CompareTag("npcPlayer") && !hasEntered) {
+        /* else if (other.gameObject.CompareTag("npcPlayer") && !hasEntered) {
 
             gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
@@ -29,14 +29,14 @@ public class levelFade : MonoBehaviour
 
             gameObject.GetComponent<Collider2D>().isTrigger = false;
             ghost.GetComponent<Collider2D>().isTrigger = false;
-        }
+        } */
     }
 
     void OnTriggerExit2D (Collider2D other) {
 
         if (other.gameObject.CompareTag("npcPlayer")) {
 
-            gameObject.GetComponent<Collider2D>().isTrigger = false;
+            gameObject.GetComponent<Collider2D>().isTrigger = true;
         }
         else if (other.gameObject.CompareTag("ghostPlayer")) {
 
