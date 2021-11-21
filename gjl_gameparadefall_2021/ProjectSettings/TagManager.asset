@@ -59,6 +59,9 @@ TagManager:
   - name: Floor
     uniqueID: 479420003
     locked: 0
+  - name: box1
+    uniqueID: 633145889
+    locked: 0
   - name: box
     uniqueID: 2534199639
     locked: 0
