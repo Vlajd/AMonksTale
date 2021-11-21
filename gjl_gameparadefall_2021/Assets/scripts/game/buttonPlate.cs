@@ -52,6 +52,7 @@ public class buttonPlate : MonoBehaviour
 
             transform.position = new Vector3(transform.position.x, transform.position.y - yValue, transform.position.z);
             doorAnim.Play("anim_DoorOpen");
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -61,6 +62,7 @@ public class buttonPlate : MonoBehaviour
 
             transform.position = new Vector3(transform.position.x, originalY, transform.position.z);
             doorAnim.Play("anim_DoorClose");
+            gameObject.GetComponent<AudioSource>().Play();
         }   
     }
 }

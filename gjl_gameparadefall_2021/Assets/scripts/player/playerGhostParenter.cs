@@ -20,6 +20,7 @@ public class playerGhostParenter : MonoBehaviour
     public int NPCIndex;
     [SerializeField] private float camShakeDuration = 0.5f;
     [SerializeField] private float camShakeMagnitude = 0.4f;
+    [SerializeField] private AudioSource[] audio = new AudioSource[3];
 
 
     // Start
@@ -117,8 +118,13 @@ public class playerGhostParenter : MonoBehaviour
 
         // error correction
 
-        if (isActive)
+        if (isActive) {
+
             activeRender.enabled = true;
+            audio[2].volume = 1f;
+        }
+        else
+            audio[2].volume = 0f;
     }
 
 
@@ -137,6 +143,8 @@ public class playerGhostParenter : MonoBehaviour
         mainCharacter.GetComponent<playerMovement>().isControlled = false;
         mainCharacter.GetComponent<playerMovement>().horizontalMove = 0;
         isActive = true;
+
+        audio[0].Play();
     }
 
     public void activateFromNPC () {
@@ -154,6 +162,7 @@ public class playerGhostParenter : MonoBehaviour
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().horizontalMove = 0;
         isActive = true;
         isNPCParent = false;
+        audio[0].Play();
     }
 
     void deactivateFromMain () {
@@ -169,6 +178,7 @@ public class playerGhostParenter : MonoBehaviour
         mainCharacter.GetComponent<playerMovement>().isControlled = true;
         isActive = false;
         isNPCParent = false;
+        audio[1].Play();
     }
 
     void deactivateFromNPC () {
@@ -184,6 +194,7 @@ public class playerGhostParenter : MonoBehaviour
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = true;
         isActive = false;
         isNPCParent = true;
+        audio[1].Play();
     }
 
     void CheckDistanceToPlayer () {

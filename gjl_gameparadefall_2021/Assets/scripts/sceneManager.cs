@@ -12,13 +12,14 @@ public class sceneManager : MonoBehaviour
 
     public void startPlay () {
 
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(playScene);
     }
 
     public void toMainMenu () {
 
         SceneManager.LoadScene(mainMenuScene);
-        Cursor.lockState = CursorLockMode.None;
+        
     }
 
     public void exitGame () {

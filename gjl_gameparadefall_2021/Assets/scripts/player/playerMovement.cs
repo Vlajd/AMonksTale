@@ -17,6 +17,9 @@ public class playerMovement : MonoBehaviour
     public bool isControlled;
     public bool playerIsInBounds;
     public bool isCarrying = false;
+    public bool isTriggeredEnd = false;
+    [SerializeField] private AudioSource[] audio = new AudioSource[3];
+    public bool boxPush = false;
 
 
     // Update
@@ -34,7 +37,7 @@ public class playerMovement : MonoBehaviour
             horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
             // jump
-            if (Input.GetAxisRaw("Jump") == 1f || Input.GetAxisRaw("Vertical") == 1f) {
+            if (Input.GetKeyDown("space") || Input.GetKeyDown("w")) {
 
                 animator.SetBool("hasJumped", true);
                 jump = true;
@@ -63,7 +66,23 @@ public class playerMovement : MonoBehaviour
             }
         }
 
+        if (isTriggeredEnd)
+            horizontalMove = walkSpeed;
+
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+        if (Mathf.Abs(horizontalMove) > 0.01)
+            audio[0].volume = 1f;
+        else
+            audio[0].volume = 0f;
+
+        if(jump)
+            audio[1].Play();
+
+        if(boxPush && Mathf.Abs(horizontalMove) > 0.1f && Mathf.Abs(horizontalMove) < walkSpeed)
+            audio[2].volume = 1f;
+        else
+            audio[2].volume = 0f;
     }
 
 

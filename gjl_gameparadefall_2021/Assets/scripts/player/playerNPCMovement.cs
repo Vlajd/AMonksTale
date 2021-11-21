@@ -13,6 +13,8 @@ public class playerNPCMovement : MonoBehaviour
     public float horizontalMove = 0f;
     private bool jump = false;
     public bool isControlled;
+    [SerializeField] private AudioSource[] audio = new AudioSource[3];
+    public bool boxPush = false;
 
     // Update
     void Update () {
@@ -30,7 +32,7 @@ public class playerNPCMovement : MonoBehaviour
             horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
             // jump
-            if (Input.GetAxisRaw("Jump") == 1f || Input.GetAxisRaw("Vertical") == 1f) {
+            if (Input.GetKeyDown("space") || Input.GetKeyDown("w")) {
 
                 jump = true;
                 animator.SetBool("hasJumped", true);
@@ -38,6 +40,19 @@ public class playerNPCMovement : MonoBehaviour
         }
 
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+        if (Mathf.Abs(horizontalMove) > 0.01)
+            audio[0].volume = 100f;
+        else
+            audio[0].volume = 0f;
+
+        if(jump)
+            audio[1].Play();
+
+        if(boxPush && Mathf.Abs(horizontalMove) > 0.1f && Mathf.Abs(horizontalMove) < walkSpeed)
+            audio[2].volume = 1f;
+        else
+            audio[2].volume = 0f;
     }
 
 
