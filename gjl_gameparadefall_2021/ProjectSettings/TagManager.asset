@@ -71,6 +71,9 @@ TagManager:
   - name: npc
     uniqueID: 1606211397
     locked: 0
+  - name: frontfloor
+    uniqueID: 1843559913
+    locked: 0
   - name: ghost
     uniqueID: 2336026945
     locked: 0
