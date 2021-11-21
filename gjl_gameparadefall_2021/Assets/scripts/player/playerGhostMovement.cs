@@ -42,6 +42,11 @@ public class playerGhostMovement : MonoBehaviour
         }
 
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+        if (horizontalMove < 0) {
+
+            gameObject.GetComponent<Collider2D>().isTrigger = true;
+        }
     }
 
 
