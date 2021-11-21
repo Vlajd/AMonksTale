@@ -30,8 +30,11 @@ public class playerNPCMovement : MonoBehaviour
             horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
             // jump
-            if (Input.GetAxisRaw("Jump") == 1f || Input.GetAxisRaw("Vertical") == 1f)
+            if (Input.GetAxisRaw("Jump") == 1f || Input.GetAxisRaw("Vertical") == 1f) {
+
                 jump = true;
+                animator.SetBool("hasJumped", true);
+            }
         }
 
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
@@ -44,5 +47,10 @@ public class playerNPCMovement : MonoBehaviour
         // Move Character
         controller.Move(horizontalMove * Time.fixedDeltaTime, false /* Would be Crouch */, jump);
         jump = false;
+    }
+
+    public void hasDoneJumping () {
+
+        animator.SetBool("hasJumped", false);
     }
 }
