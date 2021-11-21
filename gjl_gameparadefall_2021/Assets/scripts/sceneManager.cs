@@ -18,6 +18,7 @@ public class sceneManager : MonoBehaviour
     public void toMainMenu () {
 
         SceneManager.LoadScene(mainMenuScene);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void exitGame () {
