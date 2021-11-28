@@ -8,23 +8,7 @@ public class itemController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float lerpValue = 3f;
     public bool playerPickUp = false;
-
-    void OnTriggerEnter2D (Collider2D other) {
-
-        if (other.gameObject.CompareTag("mainPlayer")) {
-
-            player.GetComponent<playerMovement>().playerIsInBounds = true;
-        }
-    }
-
-    void OnTriggerExit2D (Collider2D other) {
-
-        if (other.gameObject.CompareTag("mainPlayer")) {
-
-            player.GetComponent<playerMovement>().playerIsInBounds = false;
-        }
-    }
-
+    
     void Update () {
 
         if (playerPickUp && player.GetComponent<playerMovement>().isCarrying)

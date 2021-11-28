@@ -24,9 +24,11 @@ public class fadeScript : MonoBehaviour
 
     void Update () {
 
-        if (hasTriggered){
+        if (hasTriggered) {
             player.GetComponent<playerMovement>().isTriggeredEnd = true;
-            gameManager.GetComponent<AudioSource>().volume -= 0.01f;    
+            player.GetComponent<playerMovement>().s_audio[0].volume -= 0.2f * Time.deltaTime;
+            gameManager.GetComponent<gameManager>().g_audio[0].volume -= 0.1f * Time.deltaTime;
+            gameManager.GetComponent<gameManager>().g_audio[1].volume -= 0.1f * Time.deltaTime;    
         }
     }
 }

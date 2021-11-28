@@ -11,12 +11,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject mainPlayer;
     [SerializeField] private GameObject ghostPlayer;
     [SerializeField] private GameObject canvas;
-    [SerializeField] private AudioSource[] audio = new AudioSource[2];
+    public AudioSource[] g_audio = new AudioSource[2];
     
     void Start () {
 
         canvas.SetActive(true);
-        audio[0].Play(0);
+        g_audio[0].Play(0);
     }
 
     void Update () {
@@ -34,13 +34,13 @@ public class gameManager : MonoBehaviour
 
     public void firstPlay () {
 
-        audio[0].Play(0);
+        g_audio[0].Play(0);
         gameObject.GetComponent<Animator>().Play("firstPlay");
     }
 
     public void secondPlay () {
 
-        audio[1].Play(0);
+        g_audio[1].Play(0);
         gameObject.GetComponent<Animator>().Play("secondPlay");
     }
 

@@ -15,11 +15,16 @@ public class itemPuzzleController : MonoBehaviour
             droppers[4].GetComponent<itemDropController>().isRight) {
                 
             gameObject.GetComponent<Collider2D>().enabled = false;
-            gameObject.GetComponent<Animator>().Play("anim_DoorOpen");
+            gameObject.GetComponent<Animator>().SetBool("isOpen", true);
         }
         else {
             gameObject.GetComponent<Collider2D>().enabled = true;
-            gameObject.GetComponent<Animator>().Play("anim_DoorClose");
+            gameObject.GetComponent<Animator>().SetBool("isOpen", false);
         }
+    }
+
+    public void playThisSound () {
+
+        gameObject.GetComponent<AudioSource>().Play();
     }
 }

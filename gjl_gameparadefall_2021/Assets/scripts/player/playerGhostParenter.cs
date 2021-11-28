@@ -33,7 +33,7 @@ public class playerGhostParenter : MonoBehaviour
     // Update
     void Update() {
         
-        if (Input.GetKeyDown("r")) {
+        if (Input.GetKeyDown(KeyCode.RightControl)) {
             
             CheckDistanceToPlayer();
 
@@ -117,14 +117,8 @@ public class playerGhostParenter : MonoBehaviour
         }
 
         // error correction
-
-        if (isActive) {
-
+        if (isActive)
             activeRender.enabled = true;
-            audio[2].volume = 1f;
-        }
-        else
-            audio[2].volume = 0f;
     }
 
 
@@ -145,6 +139,10 @@ public class playerGhostParenter : MonoBehaviour
         isActive = true;
 
         audio[0].Play();
+        audio[2].Play();
+
+        mainCharacter.GetComponent<Animator>().Play("anim_characterMain_altar");
+        mainCharacter.GetComponent<Animator>().SetBool("hasMoved", false);
     }
 
     public void activateFromNPC () {
@@ -162,7 +160,9 @@ public class playerGhostParenter : MonoBehaviour
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().horizontalMove = 0;
         isActive = true;
         isNPCParent = false;
+
         audio[0].Play();
+        audio[2].Play();
     }
 
     void deactivateFromMain () {
@@ -178,7 +178,9 @@ public class playerGhostParenter : MonoBehaviour
         mainCharacter.GetComponent<playerMovement>().isControlled = true;
         isActive = false;
         isNPCParent = false;
+
         audio[1].Play();
+        audio[2].Stop();
     }
 
     void deactivateFromNPC () {
@@ -194,7 +196,9 @@ public class playerGhostParenter : MonoBehaviour
         m_NPC[NPCIndex].GetComponent<playerNPCMovement>().isControlled = true;
         isActive = false;
         isNPCParent = true;
+
         audio[1].Play();
+        audio[2].Stop();
     }
 
     void CheckDistanceToPlayer () {

@@ -9,7 +9,7 @@ public class playerGhostMovement : MonoBehaviour
     [SerializeField] private playerGhostController controller;
     [SerializeField] private GameObject gameManager;
     [SerializeField] private float walkSpeed = 35f;
-    [SerializeField] private float sprintSpeed = 60f;
+    public float sprintSpeed = 60f;
     private float speed;
     public float horizontalMove = 0f;
     public float verticalMove = 0f;

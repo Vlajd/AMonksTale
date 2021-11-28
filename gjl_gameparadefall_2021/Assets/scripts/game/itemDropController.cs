@@ -11,11 +11,13 @@ public class itemDropController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject lowerRadius;
     public bool isRight;
+    public bool isUsed = false;
+    private int ItemIndex;
 
     void Update () {
 
         // rightBre
-        if (Vector3.Distance(item.transform.position, transform.position) < radius || Vector3.Distance(item.transform.position, lowerRadius.transform.position) < radius)
+        if (Vector3.Distance(item.transform.position, transform.position) < radius)
             isRight = true;
         else
             isRight = false;
@@ -34,10 +36,16 @@ public class itemDropController : MonoBehaviour
 
         for (int i = 0; i < 5; i++) {
 
-            if (Vector3.Distance(transform.position, a_items[i].transform.position) < radius || Vector3.Distance(transform.position, a_items[i].transform.position) < radius) {
-
-                a_items[i].transform.position = transform.position;
-            }
+            if (Vector3.Distance(transform.position, a_items[i].transform.position) < radius || Vector3.Distance(transform.position, a_items[i].transform.position) < radius && !isUsed)
+                ItemIndex = i;
         }
+
+        if (ItemIndex != null && Vector3.Distance(transform.position, a_items[ItemIndex].transform.position) < radius && !isUsed) {
+        
+            isUsed = true;
+            a_items[ItemIndex].transform.position = transform.position;
+        }
+        else
+            isUsed = false;
     }
 }

@@ -15,6 +15,7 @@ public class playerNPCMovement : MonoBehaviour
     public bool isControlled;
     [SerializeField] private AudioSource[] audio = new AudioSource[3];
     public bool boxPush = false;
+    public bool hasFadeEntered = false;
 
     // Update
     void Update () {
@@ -29,7 +30,8 @@ public class playerNPCMovement : MonoBehaviour
                 speed = walkSpeed;
 
             // moving
-            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+            if (!hasFadeEntered)
+                horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
             // jump
             if (Input.GetKeyDown("space") || Input.GetKeyDown("w")) {

@@ -28,4 +28,9 @@ public class buttonPlateDoor : MonoBehaviour
 
         doorCollider.enabled = true;
     }
+
+    public void playThisSound () {
+
+        gameObject.GetComponent<AudioSource>().Play();
+    }
 }

@@ -17,7 +17,7 @@ public class buttonPlate : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col) {
 
-        if (!col.isTrigger) {
+        if (!col.isTrigger && col.GetType() == typeof(BoxCollider2D)) {
 
             references ++;
             buttonPress();
@@ -26,7 +26,7 @@ public class buttonPlate : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D col) {
 
-        if (!col.isTrigger) {
+        if (!col.isTrigger && col.GetType() == typeof(BoxCollider2D)) {
             
             references --;
             buttonRelease();
@@ -51,8 +51,7 @@ public class buttonPlate : MonoBehaviour
         if (!isPressed && references > 0){
 
             transform.position = new Vector3(transform.position.x, transform.position.y - yValue, transform.position.z);
-            doorAnim.Play("anim_DoorOpen");
-            gameObject.GetComponent<AudioSource>().Play();
+            doorAnim.SetBool("isOpen", true);
         }
     }
 
@@ -61,8 +60,7 @@ public class buttonPlate : MonoBehaviour
         if (isPressed && references <= 0) {
 
             transform.position = new Vector3(transform.position.x, originalY, transform.position.z);
-            doorAnim.Play("anim_DoorClose");
-            gameObject.GetComponent<AudioSource>().Play();
+            doorAnim.SetBool("isOpen", false);
         }   
     }
 }

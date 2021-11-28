@@ -568,7 +568,6 @@ GameObject:
   - component: {fileID: 1365566004}
   - component: {fileID: 1365566003}
   - component: {fileID: 1365566002}
-  - component: {fileID: 1365566005}
   m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
@@ -652,18 +651,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365566000}
   m_CullTransparentMesh: 1
---- !u!114 &1365566005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1365566000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79607cff9685e844f96c9b863f081024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &2398841120216362512
 CanvasRenderer:
   m_ObjectHideFlags: 0

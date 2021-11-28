@@ -15,10 +15,9 @@ public class playerMovement : MonoBehaviour
     public float horizontalMove = 0f;
     private bool jump = false;
     public bool isControlled;
-    public bool playerIsInBounds;
     public bool isCarrying = false;
     public bool isTriggeredEnd = false;
-    [SerializeField] private AudioSource[] audio = new AudioSource[3];
+    public AudioSource[] s_audio = new AudioSource[3];
     public bool boxPush = false;
 
 
@@ -47,9 +46,10 @@ public class playerMovement : MonoBehaviour
 
                 Meditating();
 
+                // items
                 for (int i = 0; i < 5; i++) {
 
-                    if (Vector3.Distance(item[i].transform.position, transform.position) < itemPickUpRange && !isCarrying && playerIsInBounds) {
+                    if (Vector3.Distance(item[i].transform.position, transform.position) < itemPickUpRange && !isCarrying) {
                         
                         if (!item[i].GetComponent<itemController>().playerPickUp && !isCarrying) {
 
@@ -71,18 +71,24 @@ public class playerMovement : MonoBehaviour
 
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
-        if (Mathf.Abs(horizontalMove) > 0.01)
-            audio[0].volume = 1f;
-        else
-            audio[0].volume = 0f;
+        if (Mathf.Abs(horizontalMove) > 0.01 && !isTriggeredEnd) {
 
-        if(jump)
-            audio[1].Play();
+            animator.SetBool("hasMoved", true);
+            s_audio[0].volume = 1f;
+        }
+        else if (!isTriggeredEnd)
+            s_audio[0].volume = 0f;
+
+        if(jump) {
+        
+            animator.SetBool("hasMoved", true);
+            s_audio[1].Play();
+        }
 
         if(boxPush && Mathf.Abs(horizontalMove) > 0.1f && Mathf.Abs(horizontalMove) < walkSpeed)
-            audio[2].volume = 1f;
+            s_audio[2].volume = 1f;
         else
-            audio[2].volume = 0f;
+            s_audio[2].volume = 0f;
     }
 
 
