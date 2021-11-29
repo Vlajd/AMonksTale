@@ -33,7 +33,7 @@ public class buttonPlate : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col) {
 
-        if (!col.isTrigger && col.GetType() == typeof(BoxCollider2D)) {
+        if (!col.isTrigger) {
 
             references ++;
             //buttonPress();
@@ -42,7 +42,7 @@ public class buttonPlate : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D col) {
 
-        if (!col.isTrigger && col.GetType() == typeof(BoxCollider2D)) {
+        if (!col.isTrigger) {
             
             references --;
             isStillInside = false;

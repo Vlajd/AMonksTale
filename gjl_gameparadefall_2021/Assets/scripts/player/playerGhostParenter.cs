@@ -74,7 +74,7 @@ public class playerGhostParenter : MonoBehaviour
 
                     m_NPCdist = Vector3.Distance(transform.position, m_NPC[i].transform.position);
 
-                    if (m_NPCdist < 1f) {
+                    if (m_NPCdist < mergeDistance) {
 
                         NPCIndex = i;
                         deactivateFromNPC();
