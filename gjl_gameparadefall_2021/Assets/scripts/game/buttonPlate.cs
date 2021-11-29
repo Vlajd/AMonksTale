@@ -9,10 +9,26 @@ public class buttonPlate : MonoBehaviour
     [SerializeField] private float yValue = 0;
     private float originalY;
     public Animator doorAnim;
+    [SerializeField] private GameObject[] releaseItems;
+    private int releaseItemsLength;
+    private bool isStillInside = false;
 
     void Start () {
 
         originalY = transform.position.y;
+
+        if (releaseItems != null)
+            releaseItemsLength = releaseItems.Length; 
+    }
+
+    void FixedUpdate () {
+
+        isStillInside = false;
+    }
+
+    void OnTriggerStay2D (Collider2D col) {
+
+        isStillInside = true;
     }
 
     public void OnTriggerEnter2D(Collider2D col) {
@@ -20,7 +36,7 @@ public class buttonPlate : MonoBehaviour
         if (!col.isTrigger && col.GetType() == typeof(BoxCollider2D)) {
 
             references ++;
-            buttonPress();
+            //buttonPress();
         }
     }
 
@@ -29,21 +45,37 @@ public class buttonPlate : MonoBehaviour
         if (!col.isTrigger && col.GetType() == typeof(BoxCollider2D)) {
             
             references --;
-            buttonRelease();
+            isStillInside = false;
+            //buttonRelease(); 
         }
     }
 
     public void Update() {
 
-        if (references > 0) {
+        /*for (int i = 0; i < releaseItemsLength; i++) {
 
+            if (Vector3.Distance(transform.position, releaseItems[i].transform.position) > 3f) {
+            
+                isPressed = false;
+            }
+            else {
+
+                i = releaseItemsLength;
+                isPressed = true;
+            }
+        }*/
+
+        if (references > 0 && isStillInside) {
+
+            buttonPress();
             isPressed = true;
         }
-        else if (references <= 0) {
+        else if (references <= 0 && !isStillInside) {
 
+            buttonRelease();
             isPressed = false;
         }
-        
+
     }
 
     void buttonPress () {
