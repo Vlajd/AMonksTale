@@ -36,7 +36,6 @@ public class buttonPlate : MonoBehaviour
         if (!col.isTrigger) {
 
             references ++;
-            //buttonPress();
         }
     }
 
@@ -46,24 +45,10 @@ public class buttonPlate : MonoBehaviour
             
             references --;
             isStillInside = false;
-            //buttonRelease(); 
         }
     }
 
     public void Update() {
-
-        /*for (int i = 0; i < releaseItemsLength; i++) {
-
-            if (Vector3.Distance(transform.position, releaseItems[i].transform.position) > 3f) {
-            
-                isPressed = false;
-            }
-            else {
-
-                i = releaseItemsLength;
-                isPressed = true;
-            }
-        }*/
 
         if (references > 0 && isStillInside) {
 
