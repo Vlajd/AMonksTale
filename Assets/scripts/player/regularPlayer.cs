@@ -1,10 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class regularPlayer : characterController
+public class RegularPlayer : CharacterController
 {
     [SerializeField] private float JumpForce;
+
+    private GroundCheck _groundCheck;
+
+    private void Start()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            GroundCheck tempGroundCheck = this.transform.GetChild(i).GetComponent<GroundCheck>();
+            if(tempGroundCheck != null)
+            {
+             _groundCheck = tempGroundCheck;
+             break;
+            }
+        }
+    }
 
     public override void MoveHorizontally(float value, bool sprint)
     {
@@ -23,6 +39,6 @@ public class regularPlayer : characterController
 
     public override void Jump()
     {
-        if (_isGrounded) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+        if (_groundCheck._isGrounded) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
     }
 }

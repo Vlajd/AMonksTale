@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1985698101859490379}
   - component: {fileID: 5175193535614676925}
   m_Layer: 0
-  m_Name: gameManager
-  m_TagString: Untagged
+  m_Name: GameController
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,9 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ab4325aa21c04428ea1105d530bc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputControlls:
-    m_Name: Input Controlls
-    m_Id: 39c463ef-feed-4dd7-964f-3354063624fe
-    m_Asset: {fileID: 0}
-    m_Actions: []
-    m_Bindings: []
+  GhostPrefab: {fileID: 5273200478535195864, guid: 6f38d9a774a6e2744b8620ab7663c453, type: 3}

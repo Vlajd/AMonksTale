@@ -62,6 +62,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Possess"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3939788-094a-4756-9090-07fb4ed770e1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -515,6 +524,39 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""675e7878-001f-4ff7-92fb-3bb0e8820729"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6962ad87-913c-44c7-9f1c-235863511a6a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eacdd3da-d943-4890-963b-c027061b536f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Possess"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -527,6 +569,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_Possess = m_Player.FindAction("Possess", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -590,6 +633,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Vertical;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_Possess;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -598,6 +642,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @Possess => m_Wrapper.m_Player_Possess;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -619,6 +664,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Possess.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPossess;
+                @Possess.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPossess;
+                @Possess.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPossess;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -635,6 +683,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Possess.started += instance.OnPossess;
+                @Possess.performed += instance.OnPossess;
+                @Possess.canceled += instance.OnPossess;
             }
         }
     }
@@ -645,5 +696,6 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnPossess(InputAction.CallbackContext context);
     }
 }
