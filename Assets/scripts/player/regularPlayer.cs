@@ -39,6 +39,6 @@ public class RegularPlayer : CharacterController
 
     public override void Jump()
     {
-        if (_groundCheck._isGrounded) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+        if (_groundCheck.IsGrounded) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
     }
 }

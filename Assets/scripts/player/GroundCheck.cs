@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    [SerializeField] private string[] CollisionTags; 
+    [SerializeField] private string[] CollisionTags;
 
-    [HideInInspector] public bool _isGrounded;
+    [HideInInspector] public bool IsGrounded;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (CollisionTags.Contains(collision.gameObject.tag))
         {
-            _isGrounded = true;
+            IsGrounded = true;
         }
     }
 
@@ -21,7 +21,7 @@ public class GroundCheck : MonoBehaviour
     {
         if (CollisionTags.Contains(collision.gameObject.tag))
         {
-            _isGrounded = false;
+            IsGrounded = false;
         }
     }
 }
