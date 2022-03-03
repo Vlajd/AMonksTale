@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
                     _currentPlayerIndex = i;
                 }
             }
+            else Debug.Log("Character Missing CharacterController or wrongly tagged GameObject with \"Player\"");
         }
 
         if (_currentPlayerIndex == -1)
@@ -135,6 +136,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // everything before the _ghostPlayerIndex in the _characterController[] get checked for the 
         for (int i = 0; i < _ghostPlayerIndex; i++)
         {
             if (Vector2.Distance(_characterController[_ghostPlayerIndex].transform.position, _characterController[i].transform.position) < _characterController[_ghostPlayerIndex].PossessRadius)
@@ -149,6 +151,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // in case the shift key is still pressed ToggleGhost()
+        _sprint = _sprint || _inputControls.Player.Sprint.IsPressed();
+
         _characterController[_currentPlayerIndex].MoveHorizontally(_horizontalMovement, _sprint);
         _characterController[_currentPlayerIndex].MoveVertically(_verticalMovement, _sprint);
         if (_inputControls.Player.Jump.IsPressed()) _characterController[_currentPlayerIndex].Jump();

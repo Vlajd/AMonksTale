@@ -8,7 +8,7 @@ public class GroundCheck : MonoBehaviour
     [SerializeField] private string[] CollisionTags;
 
     [HideInInspector] public bool IsGrounded;
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (CollisionTags.Contains(collision.gameObject.tag))

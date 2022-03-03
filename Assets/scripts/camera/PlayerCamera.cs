@@ -15,11 +15,14 @@ public class PlayerCamera : MonoBehaviour
     private void Awake()
     {
         _playerController = GameObject.FindWithTag("GameController").GetComponent<PlayerController>();
-        Offset = this.transform.position;
+        if (_playerController == null) Debug.LogWarning("No Player Controller Found In Scene!");
+        Offset = new Vector3(0.0f, this.transform.position.y, this.transform.position.z);
     }
 
     private void FixedUpdate()
     {
+        if (_playerController == null) return;
+
         targetPosition = _playerController._characterController[_playerController._currentPlayerIndex].transform.position + Offset;
         this.transform.position = Vector3.Lerp(this.transform.position,
                                                new Vector3(targetPosition.x, Mathf.Clamp(targetPosition.y, LowestY, HighestY), targetPosition.z),

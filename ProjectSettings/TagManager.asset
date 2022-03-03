@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Ghost
+  - Box
+  - GroundCheck
   layers:
   - Default
   - TransparentFX
@@ -42,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ghost
+    uniqueID: 4178950449
     locked: 0

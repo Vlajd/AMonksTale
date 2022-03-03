@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2939118682181603348}
   m_Layer: 0
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: GroundCheck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,4 +73,5 @@ MonoBehaviour:
   CollisionTags:
   - Player
   - Ground
-  _isGrounded: 0
+  - Box
+  IsGrounded: 0
