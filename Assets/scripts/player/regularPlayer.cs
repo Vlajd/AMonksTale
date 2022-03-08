@@ -3,24 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class RegularPlayer : CharacterController
+public class RegularPlayer : PlayerCharacterController
 {
     [SerializeField] private float JumpForce;
-
-    private GroundCheck _groundCheck;
-
-    private void Start()
-    {
-        for (int i = 0; i < this.transform.childCount; i++)
-        {
-            GroundCheck tempGroundCheck = this.transform.GetChild(i).GetComponent<GroundCheck>();
-            if(tempGroundCheck != null)
-            {
-             _groundCheck = tempGroundCheck;
-             break;
-            }
-        }
-    }
+    [SerializeField] private float JumpDistanceToGround = 0.01f;
+    [SerializeField] private string[] GroundTags;
 
     public override void MoveHorizontally(float value, bool sprint)
     {
@@ -39,6 +26,12 @@ public class RegularPlayer : CharacterController
 
     public override void Jump()
     {
-        if (_groundCheck.IsGrounded) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+        RaycastHit2D hit = Physics2D.Raycast(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, JumpDistanceToGround);
+
+        Debug.DrawRay(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, Color.yellow, 0.2f);
+
+        if (hit.collider == null) return;
+
+        if (GroundTags.Contains(hit.collider.tag)) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
     }
 }

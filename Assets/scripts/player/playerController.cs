@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviour
     private bool _sprint = false;
     // INPUT //
 
-    [HideInInspector] public CharacterController[] _characterController;
+
+
+    [HideInInspector] public PlayerCharacterController[] _characterController;
 
     private int _ghostPlayerIndex;
     [HideInInspector] public int _currentPlayerIndex = -1;
@@ -31,11 +33,11 @@ public class PlayerController : MonoBehaviour
 
         // **CAN BE IMPROVED TO USE LESS MEMORY IN CASE ONE OF THE OBJECTS TAGGED WITH "Player" IS NOT OF TYPE characterController**
         // The + 1 is for the ghostPlayer, as it shouldn't be already created when loading the scene
-        _characterController = new CharacterController[_character.Length + 1];
+        _characterController = new PlayerCharacterController[_character.Length + 1];
 
         for (int i = 0; i < _character.Length; i++)
         {
-            CharacterController currentCharacter = _character[i].GetComponent<RegularPlayer>();
+            PlayerCharacterController currentCharacter = _character[i].GetComponent<RegularPlayer>();
 
             if (currentCharacter != null)
             {

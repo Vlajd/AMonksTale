@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostPlayer : CharacterController
+public class GhostPlayer : PlayerCharacterController
 {
     public override void MoveHorizontally(float value, bool sprint)
     {
