@@ -28,8 +28,10 @@ public class RegularPlayer : PlayerCharacterController
     {
         RaycastHit2D hit = Physics2D.Raycast(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, JumpDistanceToGround);
 
-        Debug.DrawRay(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, Color.yellow, 0.2f);
-
+        #if UnityEngine
+            Debug.DrawRay(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, Color.yellow, 0.2f);
+        #endif
+        
         if (hit.collider == null) return;
 
         if (GroundTags.Contains(hit.collider.tag)) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
