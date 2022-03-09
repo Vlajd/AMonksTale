@@ -20,72 +20,16 @@ public class PlayerController : MonoBehaviour
     private OverlayController _mainCanvasOverlayController;
     private bool _isGamePaused = false;
 
-    [HideInInspector] public PlayerCharacterController[] _characterController;
+    [HideInInspector] public Vector3 currentCheckpoint = new Vector3(-1.11f, -1.11f, -1.11f);
+
+    [HideInInspector] public PlayerCharacterController[] characterController;
+    [HideInInspector] public int  currentPlayerIndex = -1;
     private int _ghostPlayerIndex;
-    [HideInInspector] public int _currentPlayerIndex = -1;
     private bool _isGhostActive = false;
 
     private void Awake()
     {
-        
-        /// *******************************************************************************************************************************************************************
-        /// *******Character Setup*********************************************************************************************************************************************
-        /// ******************************************************************************************************************************************************************* 
-        // Tagged with "Player" will get checked to be added to the _characterController array
-        GameObject[] _character = GameObject.FindGameObjectsWithTag("Player");
-
-        // **CAN BE IMPROVED TO USE LESS MEMORY IN CASE ONE OF THE OBJECTS TAGGED WITH "Player" IS NOT OF TYPE characterController**
-        // The + 1 is for the ghostPlayer, as it shouldn't be already created when loading the scene
-        _characterController = new PlayerCharacterController[_character.Length + 1];
-
-        for (int i = 0; i < _character.Length; i++)
-        {
-            PlayerCharacterController currentCharacter = _character[i].GetComponent<RegularPlayer>();
-
-            if (currentCharacter != null)
-            {
-                _characterController[i] = currentCharacter;
-
-                if (currentCharacter.MainPlayer)
-                {
-                    if (_currentPlayerIndex != -1) Debug.LogWarning("Multiple Main Character!");
-                    _currentPlayerIndex = i;
-                }
-            }
-            else Debug.Log("Character Missing CharacterController or wrongly tagged GameObject with \"Player\"");
-        }
-
-        if (_currentPlayerIndex == -1)
-        {
-            Debug.LogWarning("No Main Character!");
-            _currentPlayerIndex = 0;
-        }
-
-        /// *************************************************************************************
-        /// *******SETUP GHOST*******************************************************************
-        if (GhostPrefab == null)
-        {
-            Debug.LogWarning("Ghost Prefab Is Not Set In PlayerController!");
-        }
-        else
-        {
-            // - 1 because array starts at index 0, not 1
-            _ghostPlayerIndex = _characterController.Length - 1;
-            GhostPlayer currentGhostPlayer = GhostPrefab.GetComponent<GhostPlayer>();
-
-            if (currentGhostPlayer == null) Debug.LogWarning("Prefab in PlayerController GhostPrefab is not of type ghostPlayer!");
-            else 
-                _characterController[_ghostPlayerIndex] = currentGhostPlayer;
-        }
-
-
-
-        /// *******************************************************************************************
-        /// ******* SETUP CANVAS **********************************************************************
-        GameObject tempMainCanvas = Instantiate(MainCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-        _mainCanvasOverlayController = tempMainCanvas.GetComponent<OverlayController>();
-
-
+        InitReferences();
 
         /// *******************************************************************************************************************************************************************
         /// *******Input System************************************************************************************************************************************************
@@ -97,7 +41,7 @@ public class PlayerController : MonoBehaviour
         _inputControls.Player.Horizontal.performed += ctx =>
         {
             _horizontalMovement = ctx.ReadValue<float>();
-            if(!_isGamePaused) _characterController[_currentPlayerIndex].SwitchDir(_horizontalMovement);
+            if(!_isGamePaused) characterController[currentPlayerIndex].SwitchDir(_horizontalMovement);
         };
         _inputControls.Player.Horizontal.canceled += _ =>
         {
@@ -130,6 +74,7 @@ public class PlayerController : MonoBehaviour
         _inputControls.Player.Esc.started += _ => TogglePausemenu();
     }
 
+
     /// Boilerplate Code for the Input System
     private void OnEnable() => _inputControls.Enable();
     private void OnDisable() => _inputControls.Disable();
@@ -141,20 +86,20 @@ public class PlayerController : MonoBehaviour
         if (!_isGhostActive)
         {
             // create instance of ghost and summon that bad boy
-            GameObject tempGhostGameObject = Instantiate(GhostPrefab, _characterController[_currentPlayerIndex].transform.position, Quaternion.identity);
-            _currentPlayerIndex = _ghostPlayerIndex;
-            _characterController[_currentPlayerIndex] = tempGhostGameObject.GetComponent<GhostPlayer>();
+            GameObject tempGhostGameObject = Instantiate(GhostPrefab, characterController[currentPlayerIndex].transform.position, Quaternion.identity);
+            currentPlayerIndex = _ghostPlayerIndex;
+            characterController[currentPlayerIndex] = tempGhostGameObject.GetComponent<GhostPlayer>();
             _isGhostActive = true;
             return;
         }
 
-        // everything before the _ghostPlayerIndex in the _characterController[] get checked for the 
+        // everything before the _ghostPlayerIndex in the characterController[] get checked for the 
         for (int i = 0; i < _ghostPlayerIndex; i++)
         {
-            if (Vector2.Distance(_characterController[_ghostPlayerIndex].transform.position, _characterController[i].transform.position) < _characterController[_ghostPlayerIndex].PossessRadius)
+            if (Vector2.Distance(characterController[_ghostPlayerIndex].transform.position, characterController[i].transform.position) < characterController[_ghostPlayerIndex].PossessRadius)
             {
-                _currentPlayerIndex = i;
-                Destroy(_characterController[_ghostPlayerIndex].gameObject);
+                currentPlayerIndex = i;
+                Destroy(characterController[_ghostPlayerIndex].gameObject);
                 _isGhostActive = false;
                 break;
             };
@@ -179,8 +124,75 @@ public class PlayerController : MonoBehaviour
         _sprint = _sprint || _inputControls.Player.Sprint.IsPressed();
 
         // movement
-        _characterController[_currentPlayerIndex].MoveHorizontally(_horizontalMovement, _sprint);
-        _characterController[_currentPlayerIndex].MoveVertically(_verticalMovement, _sprint);
-        if (_inputControls.Player.Jump.IsPressed()) _characterController[_currentPlayerIndex].Jump();
+        characterController[ currentPlayerIndex].MoveHorizontally(_horizontalMovement, _sprint);
+        characterController[ currentPlayerIndex].MoveVertically(_verticalMovement, _sprint);
+        if (_inputControls.Player.Jump.IsPressed()) characterController[ currentPlayerIndex].Jump();
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// SETUP STUFF ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void InitReferences()
+    {
+        /// *******************************************************************************************************************************************************************
+        /// *******Character Setup*********************************************************************************************************************************************
+        /// ******************************************************************************************************************************************************************* 
+        // Tagged with "Player" will get checked to be added to the characterController array
+        GameObject[] _character = GameObject.FindGameObjectsWithTag("Player");
+
+        // **CAN BE IMPROVED TO USE LESS MEMORY IN CASE ONE OF THE OBJECTS TAGGED WITH "Player" IS NOT OF TYPE characterController**
+        // The + 1 is for the ghostPlayer, as it shouldn't be already created when loading the scene
+        characterController = new PlayerCharacterController[_character.Length + 1];
+
+        for (int i = 0; i < _character.Length; i++)
+        {
+            PlayerCharacterController currentCharacter = _character[i].GetComponent<RegularPlayer>();
+
+            if (currentCharacter != null)
+            {
+                characterController[i] = currentCharacter;
+
+                if (currentCharacter.MainPlayer)
+                {
+                    if (currentPlayerIndex != -1) Debug.LogWarning("Multiple Main Character!");
+
+                    currentPlayerIndex = i;
+                }
+            }
+            else Debug.Log("Character Missing characterController or wrongly tagged GameObject with \"Player\"");
+        }
+
+        if (currentPlayerIndex == -1)
+        {
+            Debug.LogWarning("No Main Character!");
+
+            currentPlayerIndex = 0;
+        }
+
+        /// *************************************************************************************
+        /// *******SETUP GHOST*******************************************************************
+        if (GhostPrefab == null)
+        {
+            Debug.LogWarning("Ghost Prefab Is Not Set In PlayerController!");
+        }
+        else
+        {
+            // - 1 because array starts at index 0, not 1
+            _ghostPlayerIndex = characterController.Length - 1;
+            GhostPlayer currentGhostPlayer = GhostPrefab.GetComponent<GhostPlayer>();
+
+            if (currentGhostPlayer == null) Debug.LogWarning("Prefab in PlayerController GhostPrefab is not of type ghostPlayer!");
+            else 
+                characterController[_ghostPlayerIndex] = currentGhostPlayer;
+        }
+
+
+
+        /// *******************************************************************************************
+        /// ******* SETUP CANVAS **********************************************************************
+        GameObject tempMainCanvas = Instantiate(MainCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        _mainCanvasOverlayController = tempMainCanvas.GetComponent<OverlayController>();
     }
 }

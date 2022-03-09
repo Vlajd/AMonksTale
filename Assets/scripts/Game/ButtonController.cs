@@ -19,6 +19,8 @@ public class ButtonController : MonoBehaviour
 
     }
 
+    private void OnDisable() => _buttonAnimator.SetBool("IsOpen", false);
+
     private void FixedUpdate()
     {
         if (DoorAnimatorRef != null) DoorAnimatorRef.SetBool("IsOpen", false);
@@ -27,6 +29,11 @@ public class ButtonController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
+        if (!this.enabled)
+        {
+            _buttonAnimator.SetBool("IsOpen", false);
+            return;
+        }
         if (!TriggerTags.Contains(collider.gameObject.tag)) return;
         if (DoorAnimatorRef != null) DoorAnimatorRef.SetBool("IsOpen", true);
         _buttonAnimator.SetBool("IsOpen", true);

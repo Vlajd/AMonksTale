@@ -7,12 +7,12 @@ public class GhostPlayer : PlayerCharacterController
     public override void MoveHorizontally(float value, bool sprint)
     {
         if (value == 0.0f){
-            _rigidBody.velocity = new Vector2(0.0f, _rigidBody.velocity.y);
+            rigidBody.velocity = new Vector2(0.0f, rigidBody.velocity.y);
             return;
         }
 
-        if (sprint) _rigidBody.velocity = new Vector2(value * SprintSpeed, _rigidBody.velocity.y);
-        else _rigidBody.velocity = new Vector2(value * WalkSpeed, _rigidBody.velocity.y);
+        if (sprint) rigidBody.velocity = new Vector2(value * SprintSpeed, rigidBody.velocity.y);
+        else rigidBody.velocity = new Vector2(value * WalkSpeed, rigidBody.velocity.y);
     
         if(value < 0.0f) this.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         else this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -21,12 +21,12 @@ public class GhostPlayer : PlayerCharacterController
     public override void MoveVertically(float value, bool sprint)
     {
         if (value == 0.0f){
-            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0.0f);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0.0f);
             return;
         }
 
-        if (sprint) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, value * SprintSpeed);
-        else _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, value * WalkSpeed);
+        if (sprint) rigidBody.velocity = new Vector2(rigidBody.velocity.x, value * SprintSpeed);
+        else rigidBody.velocity = new Vector2(rigidBody.velocity.x, value * WalkSpeed);
     }
 
     public override void Jump()

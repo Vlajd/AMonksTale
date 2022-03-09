@@ -10,16 +10,16 @@ public abstract class PlayerCharacterController : MonoBehaviour
     public float SprintSpeed;
     public float PossessRadius;
 
-    [HideInInspector] public Rigidbody2D _rigidBody;
-    [HideInInspector] public Collider2D _collider;
+    [HideInInspector] public Rigidbody2D rigidBody;
+    [HideInInspector] public Collider2D cCollider;
 
     private void Awake()
     {
-        _rigidBody = this.GetComponent<Rigidbody2D>();
-        _collider = this.GetComponent<Collider2D>();
+        rigidBody = this.GetComponent<Rigidbody2D>();
+        cCollider = this.GetComponent<Collider2D>();
 
-        if(_rigidBody == null) Debug.LogWarning("No Rigidbody Found On", this);
-        if(_collider == null) Debug.LogWarning("No Collider Found On", this);
+        if(rigidBody == null) Debug.LogWarning("No Rigidbody Found On", this);
+        if(cCollider == null) Debug.LogWarning("No cCollider Found On", this);
     }
 
     // Implement in regularCharacter.cs and ghostCharacter.cs

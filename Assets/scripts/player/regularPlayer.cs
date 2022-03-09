@@ -13,8 +13,8 @@ public class RegularPlayer : PlayerCharacterController
     {
         if (value == 0.0f) return;
 
-        if (sprint) _rigidBody.velocity = new Vector2(value * SprintSpeed, _rigidBody.velocity.y);
-        else _rigidBody.velocity = new Vector2(value * WalkSpeed, _rigidBody.velocity.y);
+        if (sprint) rigidBody.velocity = new Vector2(value * SprintSpeed, rigidBody.velocity.y);
+        else rigidBody.velocity = new Vector2(value * WalkSpeed, rigidBody.velocity.y);
     
         if(value < 0.0f) this.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         else this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -26,14 +26,14 @@ public class RegularPlayer : PlayerCharacterController
 
     public override void Jump()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, JumpDistanceToGround);
+        RaycastHit2D hit = Physics2D.Raycast(cCollider.bounds.center - new Vector3(0.0f, cCollider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, JumpDistanceToGround);
 
         #if UnityEngine
-            Debug.DrawRay(_collider.bounds.center - new Vector3(0.0f, _collider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, Color.yellow, 0.2f);
+            Debug.DrawRay(cCollider.bounds.center - new Vector3(0.0f, cCollider.bounds.extents.y + 0.01f, 0.0f), Vector2.down, Color.yellow, 0.2f);
         #endif
         
         if (hit.collider == null) return;
 
-        if (GroundTags.Contains(hit.collider.tag)) _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+        if (GroundTags.Contains(hit.collider.tag)) rigidBody.velocity = new Vector2(rigidBody.velocity.x, JumpForce);
     }
 }

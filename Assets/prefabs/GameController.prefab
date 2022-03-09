@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1985698101859490379}
   - component: {fileID: 5175193535614676925}
+  - component: {fileID: 2980177651180319516}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -47,3 +48,15 @@ MonoBehaviour:
   MainCanvas: {fileID: 8521845535608863975, guid: 6cf699b81f305424cb80b9fe9522e416, type: 3}
   _characterController: []
   _currentPlayerIndex: -1
+--- !u!114 &2980177651180319516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9018293739012996802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29797dd5201efc84d9e8e76f16212d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

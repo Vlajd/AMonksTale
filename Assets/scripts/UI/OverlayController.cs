@@ -6,7 +6,7 @@ public class OverlayController : MonoBehaviour
 {
     [SerializeField] private GameObject Pausemenu;
     
-    [HideInInspector] Pausemenu _currentPausemenu;
+    private Pausemenu _currentPausemenu;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class OverlayController : MonoBehaviour
 
     public void ResumePausemenu()
     {
-        _currentPausemenu._resume();
+        _currentPausemenu.resumeInternal();
         Time.timeScale = 1.0f;
     }
 }

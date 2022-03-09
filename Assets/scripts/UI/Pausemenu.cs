@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pausemenu : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class Pausemenu : MonoBehaviour
         _playerController.TogglePausemenu();
     }
 
-    public void _resume()
+    public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    public void resumeInternal()
     {
         Destroy(this.gameObject);
     }

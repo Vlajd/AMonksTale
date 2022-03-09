@@ -16,22 +16,19 @@ public class PlayerCamera : MonoBehaviour
     private PlayerController _playerController;
     private Vector3 _targetPosition;
 
-    private void Awake()
+    private void Start()
     {
         _playerController = GameObject.FindWithTag("GameController").GetComponent<PlayerController>();
         if (_playerController == null) Debug.LogWarning("No Player Controller Found In Scene!");
-    }
 
-    private void Start()
-    {
-        _offset = this.transform.position - _playerController._characterController[_playerController._currentPlayerIndex].transform.position;
         LowestY += this.transform.position.y;
         HighestY += this.transform.position.y;
+        _offset = this.transform.position - _playerController.characterController[_playerController.currentPlayerIndex].transform.position;
     }
 
     private void FixedUpdate()
     {
-        _targetPosition = _playerController._characterController[_playerController._currentPlayerIndex].transform.position + _offset;
+        _targetPosition = _playerController.characterController[_playerController.currentPlayerIndex].transform.position + _offset;
 
         this.transform.position = Vector3.Lerp(this.transform.position, _targetPosition, Smoothing * Time.deltaTime);
 
@@ -44,5 +41,8 @@ public class PlayerCamera : MonoBehaviour
         {
             this.transform.position = new Vector3(this.transform.position.x, HighestY, this.transform.position.z);
         }
+
+        /// DEBUGGING (JUST UNCOMMENT)
+        /// Debug.Log(_offset + "\n" + _playerController.characterController[_playerController.currentPlayerIndex].transform.position);
     }
 }
