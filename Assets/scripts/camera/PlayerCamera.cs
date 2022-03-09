@@ -1,31 +1,48 @@
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /// TODO: Fix Ghost Looking Not Smooth (for some reason he kinda has "framedrops" (not actual framedrops tho)) ///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private Vector3 Offset;
+    private Vector3 _offset;
     [SerializeField] private float Smoothing;
     [SerializeField] private float LowestY;
     [SerializeField] private float HighestY;
 
     private PlayerController _playerController;
-    private Vector3 targetPosition;
+    private Vector3 _targetPosition;
 
     private void Awake()
     {
         _playerController = GameObject.FindWithTag("GameController").GetComponent<PlayerController>();
         if (_playerController == null) Debug.LogWarning("No Player Controller Found In Scene!");
-        Offset = new Vector3(0.0f, this.transform.position.y, this.transform.position.z);
+    }
+
+    private void Start()
+    {
+        _offset = this.transform.position - _playerController._characterController[_playerController._currentPlayerIndex].transform.position;
+        LowestY += this.transform.position.y;
+        HighestY += this.transform.position.y;
     }
 
     private void FixedUpdate()
     {
-        if (_playerController == null) return;
+        _targetPosition = _playerController._characterController[_playerController._currentPlayerIndex].transform.position + _offset;
 
-        targetPosition = _playerController._characterController[_playerController._currentPlayerIndex].transform.position + Offset;
-        this.transform.position = Vector3.Lerp(this.transform.position,
-                                               new Vector3(targetPosition.x, Mathf.Clamp(targetPosition.y, LowestY, HighestY), targetPosition.z),
-                                               Smoothing * Time.fixedDeltaTime);
+        this.transform.position = Vector3.Lerp(this.transform.position, _targetPosition, Smoothing * Time.deltaTime);
+
+
+        if (this.transform.position.y < LowestY)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, LowestY, this.transform.position.z);
+        }
+        else if (this.transform.position.y > HighestY)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, HighestY, this.transform.position.z);
+        }
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject GhostPrefab;
+    [SerializeField] private GameObject MainCanvas;
+
 
     // INPUT //
     private InputControls _inputControls;
@@ -15,9 +17,10 @@ public class PlayerController : MonoBehaviour
     // INPUT //
 
 
+    private OverlayController _mainCanvasOverlayController;
+    private bool _isGamePaused = false;
 
     [HideInInspector] public PlayerCharacterController[] _characterController;
-
     private int _ghostPlayerIndex;
     [HideInInspector] public int _currentPlayerIndex = -1;
     private bool _isGhostActive = false;
@@ -70,15 +73,17 @@ public class PlayerController : MonoBehaviour
             _ghostPlayerIndex = _characterController.Length - 1;
             GhostPlayer currentGhostPlayer = GhostPrefab.GetComponent<GhostPlayer>();
 
-            if (currentGhostPlayer == null)
-            {
-                Debug.LogWarning("Prefab in PlayerController GhostPrefab is not of type ghostPlayer!");
-            }
-            else
-            {
+            if (currentGhostPlayer == null) Debug.LogWarning("Prefab in PlayerController GhostPrefab is not of type ghostPlayer!");
+            else 
                 _characterController[_ghostPlayerIndex] = currentGhostPlayer;
-            }
         }
+
+
+
+        /// *******************************************************************************************
+        /// ******* SETUP CANVAS **********************************************************************
+        GameObject tempMainCanvas = Instantiate(MainCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        _mainCanvasOverlayController = tempMainCanvas.GetComponent<OverlayController>();
 
 
 
@@ -92,7 +97,7 @@ public class PlayerController : MonoBehaviour
         _inputControls.Player.Horizontal.performed += ctx =>
         {
             _horizontalMovement = ctx.ReadValue<float>();
-            _characterController[_currentPlayerIndex].SwitchDir(_horizontalMovement);
+            if(!_isGamePaused) _characterController[_currentPlayerIndex].SwitchDir(_horizontalMovement);
         };
         _inputControls.Player.Horizontal.canceled += _ =>
         {
@@ -117,20 +122,25 @@ public class PlayerController : MonoBehaviour
 
         // Possess Keymapping
         _inputControls.Player.Possess.started += _ => ToggleGhost();
-        
+
+        // Sprint Keymapping
         _inputControls.Player.Sprint.performed += _ => _sprint = true;
 
+        // Esc Keymapping
+        _inputControls.Player.Esc.started += _ => TogglePausemenu();
     }
 
     /// Boilerplate Code for the Input System
     private void OnEnable() => _inputControls.Enable();
     private void OnDisable() => _inputControls.Disable();
+    /// Boilerplate Code for the Input System
 
 
     private void ToggleGhost()
     {
         if (!_isGhostActive)
         {
+            // create instance of ghost and summon that bad boy
             GameObject tempGhostGameObject = Instantiate(GhostPrefab, _characterController[_currentPlayerIndex].transform.position, Quaternion.identity);
             _currentPlayerIndex = _ghostPlayerIndex;
             _characterController[_currentPlayerIndex] = tempGhostGameObject.GetComponent<GhostPlayer>();
@@ -151,14 +161,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    // toggles the pausemenu on Esc or when resume gets pressed
+    public void TogglePausemenu()
+    {
+        _isGamePaused = !_isGamePaused;
+
+        if (_isGamePaused) _mainCanvasOverlayController.InitPausemenu();
+        else _mainCanvasOverlayController.ResumePausemenu();
+    }
+
+
+
     private void FixedUpdate()
     {
-        // in case the shift key is still pressed ToggleGhost()
+        // in case the shift key is still pressed after ToggleGhost() got called
         _sprint = _sprint || _inputControls.Player.Sprint.IsPressed();
 
+        // movement
         _characterController[_currentPlayerIndex].MoveHorizontally(_horizontalMovement, _sprint);
         _characterController[_currentPlayerIndex].MoveVertically(_verticalMovement, _sprint);
         if (_inputControls.Player.Jump.IsPressed()) _characterController[_currentPlayerIndex].Jump();
     }
-
 }

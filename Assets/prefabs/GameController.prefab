@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GhostPrefab: {fileID: 5273200478535195864, guid: 6f38d9a774a6e2744b8620ab7663c453, type: 3}
+  MainCanvas: {fileID: 8521845535608863975, guid: 6cf699b81f305424cb80b9fe9522e416, type: 3}
+  _characterController: []
+  _currentPlayerIndex: -1
