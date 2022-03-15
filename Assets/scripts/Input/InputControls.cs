@@ -1106,6 +1106,434 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""9e9f25a3-6d48-4339-aa28-ab3d2bf94d84"",
+            ""actions"": [
+                {
+                    ""name"": ""Index0"",
+                    ""type"": ""Button"",
+                    ""id"": ""30df7793-8b57-4e96-91b2-273ef858a920"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index1"",
+                    ""type"": ""Button"",
+                    ""id"": ""7896cd00-c0ba-47a9-9369-483e67284c75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index2"",
+                    ""type"": ""Button"",
+                    ""id"": ""95aeee52-102a-4511-8353-6dfb6473f229"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index3"",
+                    ""type"": ""Button"",
+                    ""id"": ""df7a8f68-1289-4119-a226-35767abdbd8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index4"",
+                    ""type"": ""Button"",
+                    ""id"": ""743446eb-dec4-4b04-be02-ad45685ca49d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index5"",
+                    ""type"": ""Button"",
+                    ""id"": ""b379ce07-3a81-4f71-9a76-e8fc3460d83d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index6"",
+                    ""type"": ""Button"",
+                    ""id"": ""5db0dd5a-2466-4d43-89c7-f3cb878a83ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index7"",
+                    ""type"": ""Button"",
+                    ""id"": ""c597c415-8eba-43c6-8d76-0fe1db4cce71"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index8"",
+                    ""type"": ""Button"",
+                    ""id"": ""93bac8c5-b812-4d94-9099-282489404f25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Index9"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0dd639c-7574-44bc-8079-e6bc5e7776fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""STRG0"",
+                    ""id"": ""853680c8-46e4-4340-9f13-41319d4b8cb1"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index0"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""ce9c0108-fd36-43dd-bcad-ed103a2f08e9"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""6e11f07d-9c43-4f0c-8f6d-3d94ef9d342c"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG1"",
+                    ""id"": ""fc45dc38-cd35-454e-8659-b6a30aea877b"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index1"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""5f51c263-ebe3-40b5-aa0a-a150740100d7"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""d7395b8e-e827-4ef6-a0bd-309f268af82a"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG2"",
+                    ""id"": ""ae2d57cb-2ea6-45ec-a424-cff697a5d361"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""da194607-f700-49b6-ba93-f817e9c4fe18"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""b113f2cb-f1a0-4635-9825-eee1b82aae0b"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG3"",
+                    ""id"": ""80cedac4-694e-494e-8e35-23effbee2776"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index3"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""7ba4b9fd-1acc-4463-87fb-6d27bd68755c"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""f7619d29-6b60-4790-adee-12eb7f6fa1cd"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG4"",
+                    ""id"": ""78e11745-9a0a-4be0-b8d9-b3c71dc569e5"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index4"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""f6798818-ea4e-4bcc-b3f4-8070f1f782f7"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""1a19a0b0-3ce1-403b-b243-e81542ac5cf2"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG5"",
+                    ""id"": ""1a8a77d2-14b0-4db5-8738-8e2a4f110bbe"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index5"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""454cad8c-53e3-4e33-8667-3c2e958e5a32"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""eff3c8cb-c1a3-4cb7-9a99-007eb786787f"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG6"",
+                    ""id"": ""8d3c62ac-9503-485e-804b-f80aef87a03a"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index6"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""65a852d7-3d43-4255-9029-db77dee7e8e0"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""237a6ca3-ad88-4d56-b330-029b98b7e4a9"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG7"",
+                    ""id"": ""9bf45479-608a-4054-9f65-f1b2353bb3f1"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index7"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""bbb996be-beba-48ec-9ea6-1b96b24ae9f9"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""c18555db-b311-477a-847e-8061f9f3a896"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG8"",
+                    ""id"": ""157a1193-934a-4ba2-a2cb-d6a48cd8c18d"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index8"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""e460c7dd-c293-40ca-8e4c-ad6a4f3a14ec"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""4ca99168-b3ce-4b7e-919e-4ac098ab896a"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""STRG9"",
+                    ""id"": ""51f049b0-2256-424b-97f7-657f61cdeb78"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index9"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""6418d27c-a403-4fde-baaa-be5f097a95ec"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""b75d8ddb-c82b-4988-a933-5d20c6fd271c"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Index9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -1130,6 +1558,18 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Index0 = m_Debug.FindAction("Index0", throwIfNotFound: true);
+        m_Debug_Index1 = m_Debug.FindAction("Index1", throwIfNotFound: true);
+        m_Debug_Index2 = m_Debug.FindAction("Index2", throwIfNotFound: true);
+        m_Debug_Index3 = m_Debug.FindAction("Index3", throwIfNotFound: true);
+        m_Debug_Index4 = m_Debug.FindAction("Index4", throwIfNotFound: true);
+        m_Debug_Index5 = m_Debug.FindAction("Index5", throwIfNotFound: true);
+        m_Debug_Index6 = m_Debug.FindAction("Index6", throwIfNotFound: true);
+        m_Debug_Index7 = m_Debug.FindAction("Index7", throwIfNotFound: true);
+        m_Debug_Index8 = m_Debug.FindAction("Index8", throwIfNotFound: true);
+        m_Debug_Index9 = m_Debug.FindAction("Index9", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1363,6 +1803,111 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_Index0;
+    private readonly InputAction m_Debug_Index1;
+    private readonly InputAction m_Debug_Index2;
+    private readonly InputAction m_Debug_Index3;
+    private readonly InputAction m_Debug_Index4;
+    private readonly InputAction m_Debug_Index5;
+    private readonly InputAction m_Debug_Index6;
+    private readonly InputAction m_Debug_Index7;
+    private readonly InputAction m_Debug_Index8;
+    private readonly InputAction m_Debug_Index9;
+    public struct DebugActions
+    {
+        private @InputControls m_Wrapper;
+        public DebugActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Index0 => m_Wrapper.m_Debug_Index0;
+        public InputAction @Index1 => m_Wrapper.m_Debug_Index1;
+        public InputAction @Index2 => m_Wrapper.m_Debug_Index2;
+        public InputAction @Index3 => m_Wrapper.m_Debug_Index3;
+        public InputAction @Index4 => m_Wrapper.m_Debug_Index4;
+        public InputAction @Index5 => m_Wrapper.m_Debug_Index5;
+        public InputAction @Index6 => m_Wrapper.m_Debug_Index6;
+        public InputAction @Index7 => m_Wrapper.m_Debug_Index7;
+        public InputAction @Index8 => m_Wrapper.m_Debug_Index8;
+        public InputAction @Index9 => m_Wrapper.m_Debug_Index9;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @Index0.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex0;
+                @Index0.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex0;
+                @Index0.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex0;
+                @Index1.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex1;
+                @Index1.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex1;
+                @Index1.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex1;
+                @Index2.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex2;
+                @Index2.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex2;
+                @Index2.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex2;
+                @Index3.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex3;
+                @Index3.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex3;
+                @Index3.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex3;
+                @Index4.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex4;
+                @Index4.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex4;
+                @Index4.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex4;
+                @Index5.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex5;
+                @Index5.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex5;
+                @Index5.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex5;
+                @Index6.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex6;
+                @Index6.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex6;
+                @Index6.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex6;
+                @Index7.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex7;
+                @Index7.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex7;
+                @Index7.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex7;
+                @Index8.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex8;
+                @Index8.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex8;
+                @Index8.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex8;
+                @Index9.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex9;
+                @Index9.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex9;
+                @Index9.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIndex9;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Index0.started += instance.OnIndex0;
+                @Index0.performed += instance.OnIndex0;
+                @Index0.canceled += instance.OnIndex0;
+                @Index1.started += instance.OnIndex1;
+                @Index1.performed += instance.OnIndex1;
+                @Index1.canceled += instance.OnIndex1;
+                @Index2.started += instance.OnIndex2;
+                @Index2.performed += instance.OnIndex2;
+                @Index2.canceled += instance.OnIndex2;
+                @Index3.started += instance.OnIndex3;
+                @Index3.performed += instance.OnIndex3;
+                @Index3.canceled += instance.OnIndex3;
+                @Index4.started += instance.OnIndex4;
+                @Index4.performed += instance.OnIndex4;
+                @Index4.canceled += instance.OnIndex4;
+                @Index5.started += instance.OnIndex5;
+                @Index5.performed += instance.OnIndex5;
+                @Index5.canceled += instance.OnIndex5;
+                @Index6.started += instance.OnIndex6;
+                @Index6.performed += instance.OnIndex6;
+                @Index6.canceled += instance.OnIndex6;
+                @Index7.started += instance.OnIndex7;
+                @Index7.performed += instance.OnIndex7;
+                @Index7.canceled += instance.OnIndex7;
+                @Index8.started += instance.OnIndex8;
+                @Index8.performed += instance.OnIndex8;
+                @Index8.canceled += instance.OnIndex8;
+                @Index9.started += instance.OnIndex9;
+                @Index9.performed += instance.OnIndex9;
+                @Index9.canceled += instance.OnIndex9;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     public interface IPlayerActions
     {
         void OnHorizontal(InputAction.CallbackContext context);
@@ -1384,5 +1929,18 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnIndex0(InputAction.CallbackContext context);
+        void OnIndex1(InputAction.CallbackContext context);
+        void OnIndex2(InputAction.CallbackContext context);
+        void OnIndex3(InputAction.CallbackContext context);
+        void OnIndex4(InputAction.CallbackContext context);
+        void OnIndex5(InputAction.CallbackContext context);
+        void OnIndex6(InputAction.CallbackContext context);
+        void OnIndex7(InputAction.CallbackContext context);
+        void OnIndex8(InputAction.CallbackContext context);
+        void OnIndex9(InputAction.CallbackContext context);
     }
 }

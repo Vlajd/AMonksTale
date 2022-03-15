@@ -270,5 +270,35 @@ public class PlayerController : MonoBehaviour
 
         // Esc Keymapping
         _inputControls.Player.Esc.started += _ => TogglePausemenu();
+
+
+
+#if UNITY_EDITOR
+        DebugActions();
+#endif
     }
+
+
+
+
+
+#if UNITY_EDITOR
+    private void DebugActions()
+    {
+        GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        Vector3[] positions = new Vector3[checkPoints.Length];
+
+        for (int i = 0; i < checkPoints.Length; i++)
+        {
+            positions[i] = checkPoints[i].transform.position;
+        }
+
+        _inputControls.Debug.Index0.started += _ => {currentCheckpoint = positions[0]; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);};
+        _inputControls.Debug.Index1.started += _ => {currentCheckpoint = positions[1]; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);};
+        _inputControls.Debug.Index2.started += _ => {currentCheckpoint = positions[2]; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);};
+        _inputControls.Debug.Index3.started += _ => {currentCheckpoint = positions[3]; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);};
+        _inputControls.Debug.Index4.started += _ => {currentCheckpoint = positions[4]; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);};
+        _inputControls.Debug.Index5.started += _ => {currentCheckpoint = positions[5]; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);};
+    }
+#endif
 }

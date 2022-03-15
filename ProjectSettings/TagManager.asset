@@ -9,6 +9,7 @@ TagManager:
   - Box
   - GroundCheck
   - Camera
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
