@@ -8,13 +8,20 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private Vector3 _offset;
+    [SerializeField] private Vector3 Offset;
     [SerializeField] private float Smoothing;
     [SerializeField] private float LowestY;
     [SerializeField] private float HighestY;
 
+    [HideInInspector] public Camera CameraRenderer;
+
     private PlayerController _playerController;
     private Vector3 _targetPosition;
+
+    private void Awake()
+    {
+        CameraRenderer = this.GetComponent<Camera>();
+    }
 
     private void Start()
     {
@@ -23,12 +30,16 @@ public class PlayerCamera : MonoBehaviour
 
         LowestY += this.transform.position.y;
         HighestY += this.transform.position.y;
-        _offset = this.transform.position - _playerController.characterController[_playerController.currentPlayerIndex].transform.position;
+    }
+
+    public void SetOffsetPositioning(Vector3 externalPosition)
+    {
+        this.transform.position = externalPosition + Offset;
     }
 
     private void FixedUpdate()
     {
-        _targetPosition = _playerController.characterController[_playerController.currentPlayerIndex].transform.position + _offset;
+        _targetPosition = _playerController.characterController[_playerController.currentPlayerIndex].transform.position + Offset;
 
         this.transform.position = Vector3.Lerp(this.transform.position, _targetPosition, Smoothing * Time.deltaTime);
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8111021747603431730}
   m_Layer: 0
   m_Name: MainCamera
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -99,3 +99,4 @@ MonoBehaviour:
   Smoothing: 10
   LowestY: -10
   HighestY: 100
+  CameraRenderer: {fileID: 0}

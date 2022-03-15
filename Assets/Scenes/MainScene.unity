@@ -159554,8 +159554,16 @@ PrefabInstance:
       value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 7317310248819732417, guid: 4b50c1ea6e7cef847937e3ceed04f8ac, type: 3}
-      propertyPath: orthographic size
-      value: 5.913956
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111021747603431730, guid: 4b50c1ea6e7cef847937e3ceed04f8ac, type: 3}
+      propertyPath: Offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111021747603431730, guid: 4b50c1ea6e7cef847937e3ceed04f8ac, type: 3}
+      propertyPath: Offset.z
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8111021747603431730, guid: 4b50c1ea6e7cef847937e3ceed04f8ac, type: 3}
       propertyPath: Smoothing

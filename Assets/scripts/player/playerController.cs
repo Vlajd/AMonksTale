@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector2 currentCheckpoint = new Vector2(-1.11f, -1.11f);
 
     [HideInInspector] public PlayerCharacterController[] characterController;
+    [HideInInspector] public PlayerCamera playerCamera;
     [HideInInspector] public int currentPlayerIndex = -1;
     private int _ghostPlayerIndex;
     private bool _isGhostActive = false;
@@ -33,11 +34,6 @@ public class PlayerController : MonoBehaviour
     {
         // InitReferences();
         InitInput();
-    }
-
-    private void Start()
-    {
-        characterController[currentPlayerIndex].rigidBody.position = currentCheckpoint;
     }
 
 
@@ -139,6 +135,25 @@ public class PlayerController : MonoBehaviour
         currentPlayerIndex = -1;
         _isGhostActive = false;
 
+
+        /// *******************************************************************************************************************************************************************
+        /// *******CAMERA SETUP************************************************************************************************************************************************
+        /// *******************************************************************************************************************************************************************
+        GameObject tempPlayerCamera = GameObject.FindGameObjectWithTag("Camera");
+        if (tempPlayerCamera != null)
+        {
+            playerCamera = tempPlayerCamera.GetComponent<PlayerCamera>();
+            // deactivate camera renderer
+            if (playerCamera.CameraRenderer != null)
+            {
+                playerCamera.CameraRenderer.enabled = false;
+            }
+            else Debug.LogWarning("PlayerCamera CameraRenderer Not Jet Referenced!");
+        }
+        else Debug.LogWarning("No PlayerCamera Found");
+        
+
+
         /// *******************************************************************************************************************************************************************
         /// *******Character Setup*********************************************************************************************************************************************
         /// ******************************************************************************************************************************************************************* 
@@ -162,6 +177,14 @@ public class PlayerController : MonoBehaviour
                     if (currentPlayerIndex != -1) Debug.LogWarning("Multiple Main Character!");
 
                     currentPlayerIndex = i;
+                    if(currentCheckpoint == new Vector2(-1.11f, -1.11f))
+                    {
+                        currentCheckpoint = characterController[currentPlayerIndex].rigidBody.position;
+                    }
+
+                    // setup positions
+                    characterController[currentPlayerIndex].transform.position = new Vector3(currentCheckpoint.x, currentCheckpoint.y, 0.0f);
+                    playerCamera.SetOffsetPositioning(new Vector3(currentCheckpoint.x, currentCheckpoint.y, -1.0f));
                 }
             }
             else Debug.Log("Character Missing characterController or wrongly tagged GameObject with \"Player\"");
@@ -172,10 +195,6 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("No Main Character!");
 
             currentPlayerIndex = 0;
-        }
-        else if(currentCheckpoint == new Vector2(-1.11f, -1.11f))
-        {
-            currentCheckpoint = characterController[currentPlayerIndex].rigidBody.position;
         }
 
         /// *************************************************************************************
@@ -201,6 +220,11 @@ public class PlayerController : MonoBehaviour
         /// ******* SETUP CANVAS **********************************************************************
         GameObject tempMainCanvas = Instantiate(MainCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         _mainCanvasOverlayController = tempMainCanvas.GetComponent<OverlayController>();
+
+
+
+        // activate camera renderer again
+        playerCamera.CameraRenderer.enabled = true;
     }
 
     void InitInput()

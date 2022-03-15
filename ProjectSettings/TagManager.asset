@@ -8,6 +8,7 @@ TagManager:
   - Ghost
   - Box
   - GroundCheck
+  - Camera
   layers:
   - Default
   - TransparentFX
