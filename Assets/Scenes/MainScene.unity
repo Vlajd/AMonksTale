@@ -159178,7 +159178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3684903306119074, guid: 28162c61fd3d7424da385915b58069c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -1.805
       objectReference: {fileID: 0}
     - target: {fileID: 3684903306119074, guid: 28162c61fd3d7424da385915b58069c0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -159215,6 +159215,10 @@ PrefabInstance:
     - target: {fileID: 1817684907496119191, guid: 28162c61fd3d7424da385915b58069c0, type: 3}
       propertyPath: m_Name
       value: ButtonRoom0Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 2561091807116178976, guid: 28162c61fd3d7424da385915b58069c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6291328523982129310, guid: 28162c61fd3d7424da385915b58069c0, type: 3}
       propertyPath: DoorAnimatorRef

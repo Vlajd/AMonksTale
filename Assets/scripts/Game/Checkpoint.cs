@@ -17,11 +17,13 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!collider.CompareTag("Player")) return;
-        if (!_playerController.characterController[_playerController.currentPlayerIndex].MainPlayer) return;
+        PlayerCharacterController playerCharacterController = _playerController.characterController[_playerController.currentPlayerIndex];
+
+        if (collider.gameObject != playerCharacterController.gameObject) return;
+        if (!playerCharacterController.MainPlayer) return;
 
         DoorButton.enabled = false;
 
-        _playerController.currentCheckpoint = this.transform.position;
+        _playerController.currentCheckpoint = new Vector2(this.transform.position.x, this.transform.position.y);
     }
 }

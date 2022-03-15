@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject GhostPrefab;
     [SerializeField] private GameObject MainCanvas;
+    [SerializeField] private string CurrentSceneName = "MainScene";
 
 
     // INPUT //
@@ -20,65 +22,47 @@ public class PlayerController : MonoBehaviour
     private OverlayController _mainCanvasOverlayController;
     private bool _isGamePaused = false;
 
-    [HideInInspector] public Vector3 currentCheckpoint = new Vector3(-1.11f, -1.11f, -1.11f);
+    [HideInInspector] public Vector2 currentCheckpoint = new Vector2(-1.11f, -1.11f);
 
     [HideInInspector] public PlayerCharacterController[] characterController;
-    [HideInInspector] public int  currentPlayerIndex = -1;
+    [HideInInspector] public int currentPlayerIndex = -1;
     private int _ghostPlayerIndex;
     private bool _isGhostActive = false;
 
     private void Awake()
     {
-        InitReferences();
+        // InitReferences();
+        InitInput();
+    }
 
-        /// *******************************************************************************************************************************************************************
-        /// *******Input System************************************************************************************************************************************************
-        /// *******************************************************************************************************************************************************************
-        // Create Input Controller Instance
-        _inputControls = new InputControls();
-
-        // Horizontal Keymapping
-        _inputControls.Player.Horizontal.performed += ctx =>
-        {
-            _horizontalMovement = ctx.ReadValue<float>();
-            if(!_isGamePaused) characterController[currentPlayerIndex].SwitchDir(_horizontalMovement);
-        };
-        _inputControls.Player.Horizontal.canceled += _ =>
-        {
-            _horizontalMovement = 0.0f;
-            // Makes for nicer sprinting controlls
-            // **The If Statement can be improved for performance**
-            if (!_inputControls.Player.Horizontal.IsPressed() && !_inputControls.Player.Vertical.IsPressed()) _sprint = false;
-        };
-
-        // Vertical Keymapping
-        _inputControls.Player.Vertical.performed += ctx =>
-        {
-            _verticalMovement = ctx.ReadValue<float>();
-        };
-        _inputControls.Player.Vertical.canceled += _ =>
-        {
-            _verticalMovement = 0.0f;
-            // Makes for nicer sprinting controlls
-            // **The If Statement can be improved for performance**
-            if (!_inputControls.Player.Horizontal.IsPressed() && !_inputControls.Player.Vertical.IsPressed()) _sprint = false;
-        };
-
-        // Possess Keymapping
-        _inputControls.Player.Possess.started += _ => ToggleGhost();
-
-        // Sprint Keymapping
-        _inputControls.Player.Sprint.performed += _ => _sprint = true;
-
-        // Esc Keymapping
-        _inputControls.Player.Esc.started += _ => TogglePausemenu();
+    private void Start()
+    {
+        characterController[currentPlayerIndex].rigidBody.position = currentCheckpoint;
     }
 
 
-    /// Boilerplate Code for the Input System
-    private void OnEnable() => _inputControls.Enable();
-    private void OnDisable() => _inputControls.Disable();
-    /// Boilerplate Code for the Input System
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == CurrentSceneName)
+        {
+            InitReferences();
+            Time.timeScale = 1.0f;
+        }
+        else Destroy(this.gameObject);
+    }
+
+
+    private void OnEnable()
+    {
+        _inputControls.Enable();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        _inputControls.Disable();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
 
     private void ToggleGhost()
@@ -131,11 +115,30 @@ public class PlayerController : MonoBehaviour
 
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// SETUP STUFF ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// SETUP STUFF ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void InitReferences()
     {
+        /// *******************************************************************************************************************************************************************
+        /// *******RESET VARIABLES*********************************************************************************************************************************************
+        /// *******************************************************************************************************************************************************************
+        _sprint = false;
+        _isGamePaused = false;
+        // currentCheckpoint has to stay at changed val
+        currentPlayerIndex = -1;
+        _isGhostActive = false;
+
         /// *******************************************************************************************************************************************************************
         /// *******Character Setup*********************************************************************************************************************************************
         /// ******************************************************************************************************************************************************************* 
@@ -170,6 +173,10 @@ public class PlayerController : MonoBehaviour
 
             currentPlayerIndex = 0;
         }
+        else if(currentCheckpoint == new Vector2(-1.11f, -1.11f))
+        {
+            currentCheckpoint = characterController[currentPlayerIndex].rigidBody.position;
+        }
 
         /// *************************************************************************************
         /// *******SETUP GHOST*******************************************************************
@@ -194,5 +201,50 @@ public class PlayerController : MonoBehaviour
         /// ******* SETUP CANVAS **********************************************************************
         GameObject tempMainCanvas = Instantiate(MainCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         _mainCanvasOverlayController = tempMainCanvas.GetComponent<OverlayController>();
+    }
+
+    void InitInput()
+    {
+        /// *******************************************************************************************************************************************************************
+        /// *******Input System************************************************************************************************************************************************
+        /// *******************************************************************************************************************************************************************
+        // Create Input Controller Instance
+        _inputControls = new InputControls();
+
+        // Horizontal Keymapping
+        _inputControls.Player.Horizontal.performed += ctx =>
+        {
+            _horizontalMovement = ctx.ReadValue<float>();
+            if(!_isGamePaused) characterController[currentPlayerIndex].SwitchDir(_horizontalMovement);
+        };
+        _inputControls.Player.Horizontal.canceled += _ =>
+        {
+            _horizontalMovement = 0.0f;
+            // Makes for nicer sprinting controlls
+            // **The If Statement can be improved for performance**
+            if (!_inputControls.Player.Horizontal.IsPressed() && !_inputControls.Player.Vertical.IsPressed()) _sprint = false;
+        };
+
+        // Vertical Keymapping
+        _inputControls.Player.Vertical.performed += ctx =>
+        {
+            _verticalMovement = ctx.ReadValue<float>();
+        };
+        _inputControls.Player.Vertical.canceled += _ =>
+        {
+            _verticalMovement = 0.0f;
+            // Makes for nicer sprinting controlls
+            // **The If Statement can be improved for performance**
+            if (!_inputControls.Player.Horizontal.IsPressed() && !_inputControls.Player.Vertical.IsPressed()) _sprint = false;
+        };
+
+        // Possess Keymapping
+        _inputControls.Player.Possess.started += _ => ToggleGhost();
+
+        // Sprint Keymapping
+        _inputControls.Player.Sprint.performed += _ => _sprint = true;
+
+        // Esc Keymapping
+        _inputControls.Player.Esc.started += _ => TogglePausemenu();
     }
 }
